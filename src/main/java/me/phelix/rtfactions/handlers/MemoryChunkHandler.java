@@ -56,30 +56,28 @@ public final class MemoryChunkHandler implements ChunkHandler {
     }
 
     @Override
-    public void claimChunk(Chunk chunk) {
-
+    public void claimChunk(Chunk chunk, Faction faction) {
+        chunkMap.put(new MemoryFLocation(chunk), faction);
     }
 
     @Override
-    public void claimChunk(Location location) {
-
+    public void claimChunk(Location location, Faction faction) {
+        chunkMap.put(new MemoryFLocation(location), faction);
     }
 
     @Override
-    public void claimChunk(FLocation fLocation) {
-
+    public void claimChunk(FLocation fLocation, Faction faction) {
+        chunkMap.put(fLocation, faction);
     }
 
     @Override
     public Faction getFactionFromChunk(Chunk chunk) {
-        return null;
+        return chunkMap.getOrDefault(new MemoryFLocation(chunk), main.getFactionHandler().getWilderness());
     }
 
     @Override
     public Faction getFactionFromChunk(Location location) {
-        return null;
-
-
+        return chunkMap.getOrDefault(new MemoryFLocation(location), main.getFactionHandler().getWilderness());
     }
 
     @Override

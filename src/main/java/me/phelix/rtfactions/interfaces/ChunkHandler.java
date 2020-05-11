@@ -30,11 +30,11 @@ public interface ChunkHandler {
 
     public boolean isClaimed(FLocation fLocation);
 
-    public void claimChunk(Chunk chunk);
+    public void claimChunk(Chunk chunk, Faction faction);
 
-    public void claimChunk(Location location);
+    public void claimChunk(Location location, Faction faction);
 
-    public void claimChunk(FLocation fLocation);
+    public void claimChunk(FLocation fLocation, Faction faction);
 
     public Faction getFactionFromChunk(Chunk chunk);
 
