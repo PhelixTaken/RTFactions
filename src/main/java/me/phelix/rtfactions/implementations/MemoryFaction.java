@@ -17,6 +17,7 @@
 
 package me.phelix.rtfactions.implementations;
 
+import me.phelix.rtfactions.interfaces.FLocation;
 import me.phelix.rtfactions.interfaces.FPlayer;
 import me.phelix.rtfactions.interfaces.Faction;
 
@@ -28,6 +29,7 @@ public final class MemoryFaction implements Faction {
     private final String name;
     private final Set<FPlayer> players = new HashSet<>();
     private final Set<Faction> allies = new HashSet<>();
+    private final Set<FLocation> claimedChunks = new HashSet<>();
     private String description;
 
     public MemoryFaction(String name) {
@@ -78,4 +80,21 @@ public final class MemoryFaction implements Faction {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public void addClaim(FLocation fLocation) {
+        claimedChunks.add(fLocation);
+    }
+
+    @Override
+    public void removeClaim(FLocation fLocation) {
+        claimedChunks.remove(fLocation);
+    }
+
+    @Override
+    public Set<FLocation> getClaims() {
+        return claimedChunks;
+    }
+
+
 }

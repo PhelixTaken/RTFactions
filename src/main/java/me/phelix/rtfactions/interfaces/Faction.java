@@ -39,4 +39,10 @@ public interface Faction {
 
     public void setDescription(String description);
 
+    public void addClaim(FLocation fLocation);
+
+    public void removeClaim(FLocation fLocation);
+
+    public Set<FLocation> getClaims();
+
 }

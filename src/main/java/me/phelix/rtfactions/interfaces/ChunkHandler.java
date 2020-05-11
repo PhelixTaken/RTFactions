@@ -36,6 +36,10 @@ public interface ChunkHandler {
 
     public void claimChunk(FLocation fLocation, Faction faction);
 
+    public void removeChunk(FLocation fLocation);
+
+    public void removeAllChunks(Faction faction);
+
     public Faction getFactionFromChunk(Chunk chunk);
 
     public Faction getFactionFromChunk(Location location);

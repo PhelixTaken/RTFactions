@@ -17,12 +17,16 @@
 
 package me.phelix.rtfactions;
 
+import me.phelix.rtfactions.interfaces.ChunkHandler;
 import me.phelix.rtfactions.interfaces.FactionHandler;
+import me.phelix.rtfactions.interfaces.PlayerHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RTFactions extends JavaPlugin {
 
     private FactionHandler factionHandler;
+    private PlayerHandler playerHandler;
+    private ChunkHandler chunkHandler;
 
     public void onEnable() {
         load();
@@ -42,6 +46,14 @@ public final class RTFactions extends JavaPlugin {
 
     public FactionHandler getFactionHandler(){
         return factionHandler;
+    }
+
+    public PlayerHandler getPlayerHandler(){
+        return playerHandler;
+    }
+
+    public ChunkHandler getChunkHandler(){
+        return chunkHandler;
     }
 
 }

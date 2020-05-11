@@ -17,7 +17,6 @@
 
 package me.phelix.rtfactions.handlers;
 
-import com.google.common.collect.*;
 import me.phelix.rtfactions.RTFactions;
 import me.phelix.rtfactions.implementations.MemoryFLocation;
 import me.phelix.rtfactions.interfaces.ChunkHandler;
@@ -57,17 +56,36 @@ public final class MemoryChunkHandler implements ChunkHandler {
 
     @Override
     public void claimChunk(Chunk chunk, Faction faction) {
-        chunkMap.put(new MemoryFLocation(chunk), faction);
+        final FLocation fLocation = new MemoryFLocation(chunk);
+        faction.addClaim(fLocation);
+        chunkMap.put(fLocation, faction);
     }
 
     @Override
     public void claimChunk(Location location, Faction faction) {
-        chunkMap.put(new MemoryFLocation(location), faction);
+        final FLocation fLocation = new MemoryFLocation(location);
+        faction.addClaim(fLocation);
+        chunkMap.put(fLocation, faction);
     }
 
     @Override
     public void claimChunk(FLocation fLocation, Faction faction) {
+        faction.addClaim(fLocation);
         chunkMap.put(fLocation, faction);
+    }
+
+    @Override
+    public void removeChunk(FLocation fLocation) {
+        chunkMap.get(fLocation).getClaims().remove(fLocation);
+        chunkMap.remove(fLocation);
+    }
+
+    @Override
+    public void removeAllChunks(Faction faction) {
+        for(final FLocation fLocation : faction.getClaims()) {
+            chunkMap.remove(fLocation);
+        }
+        faction.getClaims().clear();
     }
 
     @Override
@@ -87,6 +105,6 @@ public final class MemoryChunkHandler implements ChunkHandler {
 
     @Override
     public Collection<FLocation> getClaimedChunks(Faction faction) {
-        return null;
+        return faction.getClaims();
     }
 }
