@@ -29,7 +29,7 @@ public final class MemoryFLocation implements FLocation {
 
     private final int x;
     private final int z;
-    private final World world;
+    private transient final World world;
 
     public MemoryFLocation(Location location){
         x = location.getChunk().getX();

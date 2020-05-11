@@ -28,7 +28,7 @@ import java.util.Map;
 
 public final class MemoryFactionHandler implements FactionHandler {
 
-    private Map<String, MemoryFaction> factionMap = new HashMap<>();
+    private final Map<String, MemoryFaction> factionMap = new HashMap<>();
     public static final String WILDERNESS = "Wilderness";
 
     /**
@@ -60,4 +60,5 @@ public final class MemoryFactionHandler implements FactionHandler {
     public Faction getWilderness() {
         return factionMap.get(WILDERNESS);
     }
+
 }

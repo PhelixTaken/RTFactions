@@ -21,8 +21,11 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 
 import java.util.Collection;
+import java.util.Map;
 
 public interface ChunkHandler {
+
+    public Map<FLocation, Faction> getChunkMap();
 
     public boolean isClaimed(Chunk chunk);
 

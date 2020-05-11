@@ -31,12 +31,17 @@ import java.util.Map;
 
 public final class MemoryChunkHandler implements ChunkHandler {
 
-    public final Map<FLocation, Faction> chunkMap = new HashMap<>();
+    private final Map<FLocation, Faction> chunkMap = new HashMap<>();
 
     private final RTFactions main;
 
     public MemoryChunkHandler(RTFactions main) {
         this.main = main;
+    }
+
+    @Override
+    public Map<FLocation, Faction> getChunkMap() {
+        return chunkMap;
     }
 
     @Override
