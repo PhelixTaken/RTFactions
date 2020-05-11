@@ -10,7 +10,7 @@ public final class MemoryFaction implements Faction {
 
     private final String name;
     private final Set<FPlayer> players = new HashSet<>();
-    private final Set<me.phelix.rtfactions.interfaces.Faction> allies = new HashSet<>();
+    private final Set<Faction> allies = new HashSet<>();
     private String description;
 
     public MemoryFaction(String name) {
@@ -28,7 +28,7 @@ public final class MemoryFaction implements Faction {
     }
 
     @Override
-    public Set<me.phelix.rtfactions.interfaces.Faction> getAllies() {
+    public Set<Faction> getAllies() {
         return allies;
     }
 
@@ -43,12 +43,12 @@ public final class MemoryFaction implements Faction {
     }
 
     @Override
-    public void addAlly(me.phelix.rtfactions.interfaces.Faction faction) {
+    public void addAlly(Faction faction) {
         allies.add(faction);
     }
 
     @Override
-    public void removeAlly(me.phelix.rtfactions.interfaces.Faction faction) {
+    public void removeAlly(Faction faction) {
         allies.remove(faction);
     }
 
