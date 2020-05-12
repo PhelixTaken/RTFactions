@@ -15,16 +15,12 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.phelix.rtfactions.implementations;
-
-import me.phelix.rtfactions.interfaces.FLocation;
-import me.phelix.rtfactions.interfaces.FPlayer;
-import me.phelix.rtfactions.interfaces.Faction;
+package me.phelix.rtfactions;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public final class MemoryFaction implements Faction {
+public final class Faction {
 
     private final String name;
     private final Set<FPlayer> players = new HashSet<>();
@@ -32,69 +28,56 @@ public final class MemoryFaction implements Faction {
     private final Set<FLocation> claimedChunks = new HashSet<>();
     private String description;
 
-    public MemoryFaction(String name) {
+    public Faction(String name) {
         this.name = name;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public Set<FPlayer> getPlayers() {
         return players;
     }
 
-    @Override
     public Set<Faction> getAllies() {
         return allies;
     }
 
-    @Override
     public void addPlayer(FPlayer fPlayer) {
-        players.add(fPlayer);
+        players.add((FPlayer) fPlayer);
     }
 
-    @Override
     public void removePlayer(FPlayer fPlayer) {
         players.remove(fPlayer);
     }
 
-    @Override
     public void addAlly(Faction faction) {
         allies.add(faction);
     }
 
-    @Override
     public void removeAlly(Faction faction) {
         allies.remove(faction);
     }
 
-    @Override
     public String getDescription() {
         return description;
     }
 
-    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @Override
     public void addClaim(FLocation fLocation) {
         claimedChunks.add(fLocation);
     }
 
-    @Override
     public void removeClaim(FLocation fLocation) {
         claimedChunks.remove(fLocation);
     }
 
-    @Override
     public Set<FLocation> getClaims() {
         return claimedChunks;
     }
-
 
 }

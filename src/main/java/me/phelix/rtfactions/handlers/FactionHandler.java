@@ -17,18 +17,16 @@
 
 package me.phelix.rtfactions.handlers;
 
-import me.phelix.rtfactions.implementations.MemoryFaction;
-import me.phelix.rtfactions.interfaces.Faction;
-import me.phelix.rtfactions.interfaces.FactionHandler;
+import me.phelix.rtfactions.Faction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public final class MemoryFactionHandler implements FactionHandler {
+public final class FactionHandler {
 
-    private final Map<String, MemoryFaction> factionMap = new HashMap<>();
+    private final Map<String, Faction> factionMap = new HashMap<>();
     public static final String WILDERNESS = "Wilderness";
 
     /**
@@ -38,9 +36,8 @@ public final class MemoryFactionHandler implements FactionHandler {
      *
      * @return factionMap
      */
-    @Override
     @NotNull
-    public final Map<String, MemoryFaction> getFactionMap() {
+    public final Map<String, Faction> getFactionMap() {
         return factionMap;
     }
 
@@ -50,13 +47,11 @@ public final class MemoryFactionHandler implements FactionHandler {
      * @param name The faction name that you want to get.
      * @return Faction that exists.
      */
-    @Override
     @Nullable
-    public final MemoryFaction getByName(String name) {
+    public final Faction getByName(String name) {
         return factionMap.get(name);
     }
 
-    @Override
     public Faction getWilderness() {
         return factionMap.get(WILDERNESS);
     }

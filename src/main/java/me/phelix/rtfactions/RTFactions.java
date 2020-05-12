@@ -18,16 +18,17 @@
 package me.phelix.rtfactions;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import me.phelix.rtfactions.handlers.MemoryChunkHandler;
-import me.phelix.rtfactions.handlers.MemoryFactionHandler;
-import me.phelix.rtfactions.handlers.MemoryPlayerHandler;
-import me.phelix.rtfactions.implementations.MemoryFPlayer;
-import me.phelix.rtfactions.interfaces.*;
+import me.phelix.rtfactions.handlers.ChunkHandler;
+import me.phelix.rtfactions.handlers.FactionHandler;
+import me.phelix.rtfactions.handlers.PlayerHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
@@ -43,6 +44,7 @@ public final class RTFactions extends JavaPlugin {
 
     public void onDisable() {
         save();
+        System.out.println("Saving RTFactions");
     }
 
     public FactionHandler getFactionHandler() {
@@ -61,22 +63,23 @@ public final class RTFactions extends JavaPlugin {
         final File factionFile = new File(getDataFolder() + File.separator + "Factions", "factions.json");
         final File worldFile = new File(getDataFolder() + File.separator + "Factions", "world.json");
 
+        factionHandler = new FactionHandler();
+        chunkHandler = new ChunkHandler(this);
+        playerHandler = new PlayerHandler();
+
         if (!factionFile.exists()) return;
 
         try {
             final Gson gson = new Gson();
             final FileReader factionReader = new FileReader(factionFile);
 
-            factionHandler = new MemoryFactionHandler();
-            chunkHandler = new MemoryChunkHandler(this);
-            playerHandler = new MemoryPlayerHandler();
             final Type factionType = new TypeToken<HashMap<String, Faction>>(){}.getType();
             factionHandler.getFactionMap().putAll((gson.fromJson(factionReader, factionType)));
 
             for(final Faction faction : factionHandler.getFactionMap().values()){
                 for(final FPlayer fPlayer : faction.getPlayers()) {
                     fPlayer.setFaction(faction);
-                    playerHandler.getPlayerMap().put(fPlayer.getUUID(), (MemoryFPlayer) fPlayer);
+                    playerHandler.getPlayerMap().put(fPlayer.getUUID(), (FPlayer) fPlayer);
                 }
             }
 
@@ -93,6 +96,33 @@ public final class RTFactions extends JavaPlugin {
     }
 
     private void save() {
+        final File factionFile = new File(getDataFolder() + File.separator + "Factions", "factions.json");
+        final File worldFile = new File(getDataFolder() + File.separator + "Factions", "world.json");
+
+
+        try {
+            final File file = new File(getDataFolder() + File.separator + "Factions");
+            file.mkdirs();
+            factionFile.createNewFile();
+            worldFile.createNewFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try(final FileWriter fileWriter = new FileWriter(factionFile)) {
+            gson.toJson(factionHandler.getFactionMap(), fileWriter);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        try(final FileWriter fileWriter = new FileWriter(worldFile)) {
+            gson.toJson(chunkHandler.getChunkMap(), fileWriter);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 

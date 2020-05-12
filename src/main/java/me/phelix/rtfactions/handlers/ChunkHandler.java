@@ -18,10 +18,8 @@
 package me.phelix.rtfactions.handlers;
 
 import me.phelix.rtfactions.RTFactions;
-import me.phelix.rtfactions.implementations.MemoryFLocation;
-import me.phelix.rtfactions.interfaces.ChunkHandler;
-import me.phelix.rtfactions.interfaces.FLocation;
-import me.phelix.rtfactions.interfaces.Faction;
+import me.phelix.rtfactions.FLocation;
+import me.phelix.rtfactions.Faction;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 
@@ -29,63 +27,54 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class MemoryChunkHandler implements ChunkHandler {
+public final class ChunkHandler {
 
     private final Map<FLocation, Faction> chunkMap = new HashMap<>();
 
     private final RTFactions main;
 
-    public MemoryChunkHandler(RTFactions main) {
+    public ChunkHandler(RTFactions main) {
         this.main = main;
     }
 
-    @Override
     public Map<FLocation, Faction> getChunkMap() {
         return chunkMap;
     }
 
-    @Override
     public boolean isClaimed(Chunk chunk) {
-        return isClaimed(new MemoryFLocation(chunk));
+        return isClaimed(new FLocation(chunk));
     }
 
-    @Override
     public boolean isClaimed(Location location) {
-        return isClaimed(new MemoryFLocation(location));
+        return isClaimed(new FLocation(location));
     }
 
-    @Override
     public boolean isClaimed(FLocation fLocation) {
         return chunkMap.containsKey(fLocation);
     }
 
-    @Override
     public void claimChunk(Chunk chunk, Faction faction) {
-        final FLocation fLocation = new MemoryFLocation(chunk);
+        final FLocation fLocation = new FLocation(chunk);
         faction.addClaim(fLocation);
         chunkMap.put(fLocation, faction);
     }
 
-    @Override
     public void claimChunk(Location location, Faction faction) {
-        final FLocation fLocation = new MemoryFLocation(location);
+        final FLocation fLocation = new FLocation(location);
         faction.addClaim(fLocation);
         chunkMap.put(fLocation, faction);
     }
 
-    @Override
     public void claimChunk(FLocation fLocation, Faction faction) {
         faction.addClaim(fLocation);
         chunkMap.put(fLocation, faction);
     }
 
-    @Override
     public void removeChunk(FLocation fLocation) {
         chunkMap.get(fLocation).getClaims().remove(fLocation);
         chunkMap.remove(fLocation);
     }
 
-    @Override
     public void removeAllChunks(Faction faction) {
         for(final FLocation fLocation : faction.getClaims()) {
             chunkMap.remove(fLocation);
@@ -93,22 +82,18 @@ public final class MemoryChunkHandler implements ChunkHandler {
         faction.getClaims().clear();
     }
 
-    @Override
     public Faction getFactionFromChunk(Chunk chunk) {
-        return chunkMap.getOrDefault(new MemoryFLocation(chunk), main.getFactionHandler().getWilderness());
+        return chunkMap.getOrDefault(new FLocation(chunk), main.getFactionHandler().getWilderness());
     }
 
-    @Override
     public Faction getFactionFromChunk(Location location) {
-        return chunkMap.getOrDefault(new MemoryFLocation(location), main.getFactionHandler().getWilderness());
+        return chunkMap.getOrDefault(new FLocation(location), main.getFactionHandler().getWilderness());
     }
 
-    @Override
     public Faction getFactionFromChunk(FLocation fLocation) {
         return chunkMap.getOrDefault(fLocation, main.getFactionHandler().getWilderness());
     }
 
-    @Override
     public Collection<FLocation> getClaimedChunks(Faction faction) {
         return faction.getClaims();
     }

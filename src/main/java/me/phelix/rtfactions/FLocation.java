@@ -15,71 +15,63 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.phelix.rtfactions.implementations;
+package me.phelix.rtfactions;
 
-import me.phelix.rtfactions.interfaces.FLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.World;
 
 import java.util.Objects;
+import java.util.UUID;
 
-public final class MemoryFLocation implements FLocation {
+public final class FLocation {
 
     private final int x;
     private final int z;
-    private transient final World world;
+    private final String worldUUID;
 
-    public MemoryFLocation(Location location){
+    public FLocation(Location location) {
         x = location.getChunk().getX();
         z = location.getChunk().getZ();
-        world = location.getWorld();
+        worldUUID = location.getWorld().getUID().toString();
     }
 
-    public MemoryFLocation(Chunk chunk){
+    public FLocation(Chunk chunk) {
         x = chunk.getX();
         z = chunk.getZ();
-        world = chunk.getWorld();
+        worldUUID = chunk.getWorld().getUID().toString();
     }
 
-    @Override
     public int getX() {
         return x;
     }
 
-    @Override
     public int getZ() {
         return z;
     }
 
-    @Override
     public Chunk getChunk() {
-        return Bukkit.getWorld(world.getUID()).getChunkAt(x, z);
+        return Bukkit.getWorld(worldUUID).getChunkAt(x, z);
     }
 
-    @Override
-    public World getWorld() {
-        return world;
+    public UUID getWorldUUID() {
+        return UUID.fromString(worldUUID);
     }
 
-    @Override
     public String getWorldName() {
-        return world.getName();
+        return Bukkit.getWorld(worldUUID).getName();
     }
 
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MemoryFLocation that = (MemoryFLocation) o;
+        FLocation that = (FLocation) o;
         return x == that.x &&
                 z == that.z &&
-                world.equals(that.world);
+                worldUUID.equals(that.worldUUID);
     }
 
-    @Override
     public int hashCode() {
-        return Objects.hash(x, z, world);
+        return Objects.hash(x, z, worldUUID);
     }
 }

@@ -17,8 +17,7 @@
 
 package me.phelix.rtfactions.handlers;
 
-import me.phelix.rtfactions.implementations.MemoryFPlayer;
-import me.phelix.rtfactions.interfaces.PlayerHandler;
+import me.phelix.rtfactions.FPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -29,9 +28,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public final class MemoryPlayerHandler implements PlayerHandler {
+public final class PlayerHandler {
 
-    private final Map<UUID, MemoryFPlayer> playerMap = new HashMap<>();
+    private final Map<UUID, FPlayer> playerMap = new HashMap<>();
 
     /**
      * Holds all the players.
@@ -40,9 +39,8 @@ public final class MemoryPlayerHandler implements PlayerHandler {
      *
      * @return playerMap
      */
-    @Override
     @NotNull
-    public final Map<UUID, MemoryFPlayer> getPlayerMap() {
+    public final Map<UUID, FPlayer> getPlayerMap() {
         return playerMap;
     }
 
@@ -52,9 +50,8 @@ public final class MemoryPlayerHandler implements PlayerHandler {
      * @param id The id that is being used
      * @return FPlayer
      */
-    @Override
     @Nullable
-    public final MemoryFPlayer getByID(String id) {
+    public final FPlayer getByID(String id) {
         return playerMap.get(UUID.fromString(id));
     }
 
@@ -65,9 +62,8 @@ public final class MemoryPlayerHandler implements PlayerHandler {
      * @param player The online player
      * @return FPlayer
      */
-    @Override
     @Nullable
-    public final MemoryFPlayer getByPlayer(Player player) {
+    public final FPlayer getByPlayer(Player player) {
         return playerMap.get(player.getUniqueId());
     }
 
@@ -81,9 +77,8 @@ public final class MemoryPlayerHandler implements PlayerHandler {
      * @return FPlayer
      */
     @Deprecated
-    @Override
     @Nullable
-    public final MemoryFPlayer getByName(String name) {
+    public final FPlayer getByName(String name) {
         return playerMap.get(Objects.requireNonNull(Bukkit.getOfflinePlayer(name)).getUniqueId());
     }
 }

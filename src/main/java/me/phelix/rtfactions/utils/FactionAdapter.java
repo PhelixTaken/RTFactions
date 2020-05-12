@@ -15,18 +15,24 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.phelix.rtfactions.interfaces;
+package me.phelix.rtfactions.utils;
 
-import me.phelix.rtfactions.implementations.MemoryFaction;
+import com.google.gson.*;
+import me.phelix.rtfactions.Faction;
 
-import java.util.Map;
+import java.lang.reflect.Type;
 
-public interface FactionHandler {
+public final class FactionAdapter implements JsonSerializer<Faction>, JsonDeserializer<Faction> {
 
-    public Map<String, MemoryFaction> getFactionMap();
+    @Override
+    public JsonElement serialize(Faction faction, Type type, JsonSerializationContext context){
+        final Type targetType = faction != null ? faction.getClass() : type;
+        return context.serialize(faction, targetType);
+    }
 
-    public MemoryFaction getByName(String name);
-
-    public Faction getWilderness();
+    @Override
+    public Faction deserialize(JsonElement json, Type type, JsonDeserializationContext context){
+        return context.deserialize(json, Faction.class);
+    }
 
 }

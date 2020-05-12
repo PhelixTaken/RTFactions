@@ -15,57 +15,48 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.phelix.rtfactions.implementations;
+package me.phelix.rtfactions;
 
-import me.phelix.rtfactions.interfaces.FPlayer;
-import me.phelix.rtfactions.interfaces.Faction;
 import me.phelix.rtfactions.utils.Role;
 
 import java.util.UUID;
 
-public final class MemoryFPlayer implements FPlayer {
+public final class FPlayer {
 
     private final String id;
-    private Faction faction;
+    private transient Faction faction;
     private Role role;
 
-    public MemoryFPlayer(String id) {
+    public FPlayer(String id) {
         this.id = id;
     }
 
-    @Override
     public String getId() {
         return id;
     }
 
-    @Override
     public UUID getUUID() {
         return UUID.fromString(id);
     }
 
-    @Override
     public Role getRole() {
         return role;
     }
 
-    @Override
     public void setRole(Role role) {
         this.role = role;
     }
 
-    @Override
     public Faction getFaction() {
         return faction;
     }
 
-    @Override
     public void setFaction(Faction faction) {
         if (this.faction != null && this.faction.equals(faction))
             return;
         this.faction = faction;
     }
 
-    @Override
     public boolean hasFaction() {
         return !(faction.getName().equalsIgnoreCase("wilderness") || faction.getName().equalsIgnoreCase("warzone") || faction.getName().equalsIgnoreCase("safezone"));
     }
