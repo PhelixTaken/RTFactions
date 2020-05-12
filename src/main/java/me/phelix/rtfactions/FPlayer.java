@@ -18,6 +18,7 @@
 package me.phelix.rtfactions;
 
 import me.phelix.rtfactions.utils.Role;
+import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
@@ -59,5 +60,9 @@ public final class FPlayer {
 
     public boolean hasFaction() {
         return !(faction.getName().equalsIgnoreCase("wilderness") || faction.getName().equalsIgnoreCase("warzone") || faction.getName().equalsIgnoreCase("safezone"));
+    }
+
+    public void sendMessage(String message){
+        Bukkit.getPlayer(UUID.fromString(id)).sendMessage(message);
     }
 }

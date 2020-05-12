@@ -17,6 +17,8 @@
 
 package me.phelix.rtfactions;
 
+import me.phelix.rtfactions.utils.permission.FactionPermission;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +29,7 @@ public final class Faction {
     private final Set<Faction> allies = new HashSet<>();
     private final Set<FLocation> claimedChunks = new HashSet<>();
     private String description;
+    private FactionPermission factionPermission;
 
     public Faction(String name) {
         this.name = name;
@@ -78,6 +81,14 @@ public final class Faction {
 
     public Set<FLocation> getClaims() {
         return claimedChunks;
+    }
+
+    public FactionPermission getPermissions(){
+        return factionPermission;
+    }
+
+    public void setPermission(FactionPermission factionPermission){
+        this.factionPermission = factionPermission;
     }
 
 }

@@ -15,24 +15,32 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.phelix.rtfactions.utils;
+package me.phelix.rtfactions.utils.permission;
 
-import com.google.gson.*;
-import me.phelix.rtfactions.Faction;
+public enum Permission {
 
-import java.lang.reflect.Type;
-
-public final class FactionAdapter implements JsonSerializer<Faction>, JsonDeserializer<Faction> {
-
-    @Override
-    public JsonElement serialize(Faction faction, Type type, JsonSerializationContext context){
-        final Type targetType = faction != null ? faction.getClass() : type;
-        return context.serialize(faction, targetType);
-    }
-
-    @Override
-    public Faction deserialize(JsonElement json, Type type, JsonDeserializationContext context){
-        return context.deserialize(json, Faction.class);
-    }
+    NONE,
+    CLAIMING,
+    UNCLAIMING,
+    UNCLAIMING_ALL,
+    BREAKING,
+    PLACING,
+    INVITING,
+    KICK,
+    PROMOTE,
+    DEMOTE,
+    DISBAND,
+    SET_WARP,
+    WARP,
+    DELETE_WARP,
+    DEFAULT_ROLE,
+    SET_DESCRIPTION,
+    PERMS,
+    ADD_ALLY,
+    REMOVE_ALLY,
+    CHAT,
+    SET_OPEN,
+    SET_HOME,
+    HOME
 
 }
