@@ -58,6 +58,11 @@
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
 
+        <repository>
+            <id>savagelabs</id>
+            <url>https://nexus.savagelabs.net/repository/maven-public/</url>
+        </repository>
+
     </repositories>
     <dependencies>
 
@@ -73,6 +78,12 @@
             <artifactId>annotations</artifactId>
             <version>16.0.1</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.prosavage</groupId>
+            <artifactId>BasePlugin</artifactId>
+            <version>1.7.2</version>
         </dependency>
 
     </dependencies>

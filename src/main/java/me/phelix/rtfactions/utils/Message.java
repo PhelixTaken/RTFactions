@@ -17,6 +17,11 @@
 
 package me.phelix.rtfactions.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import net.prosavage.baseplugin.serializer.Persist;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,13 +148,12 @@ public final class Message {
         add("&8&l&m===========================================");
     }};
 
-//
-//    public final void save(Persist persist, File file){
-//        persist.save(false, instance, file);
-//    }
-//
-//    public final void load(Persist persist, File file){
-//        persist.load(Message.class, file);
-//    }
+    public final void save(Persist persist, File file){
+        persist.save(false, instance, file);
+    }
+
+    public final void load(Persist persist, File file){
+        persist.load(Message.class, file);
+    }
 
 }
