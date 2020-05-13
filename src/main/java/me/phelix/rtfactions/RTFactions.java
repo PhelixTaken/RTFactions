@@ -21,9 +21,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import me.phelix.rtfactions.commands.CommandHandler;
+import me.phelix.rtfactions.events.JoinEvent;
 import me.phelix.rtfactions.handlers.ChunkHandler;
 import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.handlers.PlayerHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -41,12 +43,17 @@ public final class RTFactions extends JavaPlugin {
 
     public void onEnable() {
         getCommand("f").setExecutor(new CommandHandler(this));
+        registerEvents();
         load();
     }
 
     public void onDisable() {
         save();
         System.out.println("Saving RTFactions");
+    }
+
+    private void registerEvents(){
+        Bukkit.getPluginManager().registerEvents(new JoinEvent(this), this);
     }
 
     public FactionHandler getFactionHandler() {
@@ -68,6 +75,13 @@ public final class RTFactions extends JavaPlugin {
         factionHandler = new FactionHandler();
         chunkHandler = new ChunkHandler(this);
         playerHandler = new PlayerHandler();
+
+        final Faction wilderness = new Faction("Wilderness");
+        final Faction safeZone = new Faction("Safezone");
+        final Faction warZone = new Faction("Warzone");
+        getFactionHandler().getFactionMap().put(wilderness.getName(), wilderness);
+        getFactionHandler().getFactionMap().put(safeZone.getName(), safeZone);
+        getFactionHandler().getFactionMap().put(warZone.getName(), warZone);
 
         if (!factionFile.exists()) return;
 

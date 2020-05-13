@@ -19,6 +19,9 @@ package me.phelix.rtfactions;
 
 import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +32,7 @@ public final class Faction {
     private final Set<FPlayer> players = new HashSet<>();
     private final Set<Faction> allies = new HashSet<>();
     private final Set<FLocation> claimedChunks = new HashSet<>();
+    private final Set<FPlayer> invitations = new HashSet<>();
     private String description;
     private FactionPermission factionPermission;
     private int power;
@@ -39,17 +43,21 @@ public final class Faction {
         this.name = name;
     }
 
+    @NotNull
     public String getName() {
         return name;
     }
 
+    @NotNull
     public Set<FPlayer> getPlayers() {
         return players;
     }
 
+    @NotNull
     public Set<Faction> getAllies() {
         return allies;
     }
+
 
     public void addPlayer(FPlayer fPlayer) {
         players.add((FPlayer) fPlayer);
@@ -67,6 +75,7 @@ public final class Faction {
         allies.remove(faction);
     }
 
+    @NotNull
     public String getDescription() {
         return description;
     }
@@ -83,10 +92,12 @@ public final class Faction {
         claimedChunks.remove(fLocation);
     }
 
+    @NotNull
     public Set<FLocation> getClaims() {
         return claimedChunks;
     }
 
+    @NotNull
     public FactionPermission getPermissions() {
         return factionPermission;
     }
@@ -95,7 +106,7 @@ public final class Faction {
         this.factionPermission = factionPermission;
     }
 
-    public final Integer getTotalPower() {
+    public final int getTotalPower() {
         return power;
     }
 
@@ -103,10 +114,11 @@ public final class Faction {
         power = amount;
     }
 
-    public final Integer getPowerLeft() {
+    public final int getPowerLeft() {
         return power - claimedChunks.size();
     }
 
+    @NotNull
     public Role getDefaultRole() {
         if (defaultRole == null)
             defaultRole = Role.RECRUIT;
@@ -125,5 +137,25 @@ public final class Faction {
         this.open = open;
     }
 
+    @NotNull
+    public Set<FPlayer> getInvitations(){
+        return invitations;
+    }
 
+    public void invite(FPlayer fPlayer){
+        invitations.add(fPlayer);
+    }
+
+    public void deinvite(FPlayer fPlayer){
+        invitations.remove(fPlayer);
+    }
+
+    public final void broadCast(String message) {
+        for (final FPlayer fPlayer : getPlayers()) {
+            final Player player = Bukkit.getPlayer(fPlayer.getUUID());
+            if (player != null) {
+                player.sendMessage(message);
+            }
+        }
+    }
 }

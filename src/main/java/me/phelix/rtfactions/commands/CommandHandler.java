@@ -36,6 +36,8 @@ public final class CommandHandler implements CommandExecutor {
     public CommandHandler(RTFactions plugin) {
         this.plugin = plugin;
         commands.add(new CmdCreateFaction());
+        commands.add(new CmdInvite());
+        commands.add(new CmdJoin());
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

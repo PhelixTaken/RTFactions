@@ -19,6 +19,9 @@ package me.phelix.rtfactions;
 
 import me.phelix.rtfactions.utils.Role;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -32,22 +35,27 @@ public final class FPlayer {
         this.id = id;
     }
 
+    @NotNull
     public String getId() {
         return id;
     }
 
+    @NotNull
     public UUID getUUID() {
         return UUID.fromString(id);
     }
 
+    @NotNull
     public Role getRole() {
         return role;
     }
+
 
     public void setRole(Role role) {
         this.role = role;
     }
 
+    @NotNull
     public Faction getFaction() {
         return faction;
     }
@@ -58,11 +66,17 @@ public final class FPlayer {
         this.faction = faction;
     }
 
+
     public boolean hasFaction() {
         return !(faction.getName().equalsIgnoreCase("wilderness") || faction.getName().equalsIgnoreCase("warzone") || faction.getName().equalsIgnoreCase("safezone"));
     }
 
     public void sendMessage(String message){
         Bukkit.getPlayer(UUID.fromString(id)).sendMessage(message);
+    }
+
+    @Nullable
+    public Player getPlayer(){
+        return Bukkit.getPlayer(UUID.fromString(id));
     }
 }
