@@ -51,7 +51,7 @@ public abstract class SubCommand {
         this.factionNeeded = factionNeeded;
     }
 
-    public abstract void execute(CommandSender sender, String[] args, RTFactions plugin, PlayerHandler playerHandler, FactionHandler factionHandler, ChunkHandler chunkHandler);
+    public abstract void execute(CommandSender sender, String[] args);
 
     public final boolean setCommandSender(CommandSender sender, RTFactions plugin, PlayerHandler playerHandler, FactionHandler factionHandler, ChunkHandler chunkHandler) {
         this.plugin = plugin;
@@ -70,14 +70,23 @@ public abstract class SubCommand {
         return true;
     }
 
-    public boolean hasPermission(){
-        if(fme.getRole() == null) return false;
+    public final boolean hasPermission() {
 
-        if(factionNeeded && !fme.hasFaction()) return false;
+        if (fme.getRole() == null)
+            return false;
 
-        if(!factionNeeded && permission == Permission.NONE) return true;
+        if (factionNeeded && !fme.hasFaction()) {
+            sendMessage(Message.command_faction_needed);
+            return false;
+        }
 
-        if(!myFaction.getPermissions().hasPermission(fme.getRole(), permission)) return false;
+        if (!factionNeeded && permission == Permission.NONE)
+            return true;
+
+        if (!myFaction.getPermissions().hasPermission(fme.getRole(), permission)) {
+            sendMessage(Message.command_perm_needed, permission.name().toLowerCase());
+            return false;
+        }
 
         return myFaction.getPermissions().hasPermission(fme.getRole(), permission);
     }

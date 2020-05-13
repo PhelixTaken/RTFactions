@@ -17,6 +17,7 @@
 
 package me.phelix.rtfactions;
 
+import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
 
 import java.util.HashSet;
@@ -30,6 +31,9 @@ public final class Faction {
     private final Set<FLocation> claimedChunks = new HashSet<>();
     private String description;
     private FactionPermission factionPermission;
+    private int power;
+    private Role defaultRole;
+    private boolean open = false;
 
     public Faction(String name) {
         this.name = name;
@@ -83,12 +87,43 @@ public final class Faction {
         return claimedChunks;
     }
 
-    public FactionPermission getPermissions(){
+    public FactionPermission getPermissions() {
         return factionPermission;
     }
 
-    public void setPermission(FactionPermission factionPermission){
+    public void setPermission(FactionPermission factionPermission) {
         this.factionPermission = factionPermission;
     }
+
+    public final Integer getTotalPower() {
+        return power;
+    }
+
+    public final void setTotalPower(int amount) {
+        power = amount;
+    }
+
+    public final Integer getPowerLeft() {
+        return power - claimedChunks.size();
+    }
+
+    public Role getDefaultRole() {
+        if (defaultRole == null)
+            defaultRole = Role.RECRUIT;
+        return defaultRole;
+    }
+
+    public void setDefaultRole(Role role) {
+        defaultRole = role;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
 
 }

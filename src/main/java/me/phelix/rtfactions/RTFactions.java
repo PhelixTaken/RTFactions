@@ -20,6 +20,7 @@ package me.phelix.rtfactions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import me.phelix.rtfactions.commands.CommandHandler;
 import me.phelix.rtfactions.handlers.ChunkHandler;
 import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.handlers.PlayerHandler;
@@ -39,6 +40,7 @@ public final class RTFactions extends JavaPlugin {
     private ChunkHandler chunkHandler;
 
     public void onEnable() {
+        getCommand("f").setExecutor(new CommandHandler(this));
         load();
     }
 
