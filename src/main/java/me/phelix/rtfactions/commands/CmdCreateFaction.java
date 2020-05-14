@@ -34,13 +34,13 @@ public final class CmdCreateFaction extends SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
 
-        if (args.length == 1 || args.length > 2) {
+        if (args.length != 1) {
             fme.sendMessage(toString());
             return;
         }
 
-        if (plugin.getFactionHandler().getFactionMap().containsKey(args[1])) {
-            sendMessage(Message.commandCreatedFactionAlreadyExists, args[1]);
+        if (plugin.getFactionHandler().getFactionMap().containsKey(args[0])) {
+            sendMessage(Message.commandCreatedFactionAlreadyExists, args[0]);
             return;
         }
 
@@ -49,8 +49,8 @@ public final class CmdCreateFaction extends SubCommand {
             return;
         }
 
-        plugin.getFactionHandler().getByName("Wilderness").removePlayer(fme);
-        final Faction faction = new Faction(args[1]);
+        plugin.getFactionHandler().getWilderness().removePlayer(fme);
+        final Faction faction = new Faction(args[0]);
         plugin.getFactionHandler().getFactionMap().put(faction.getName(), faction);
         fme.setFaction(faction);
         fme.setRole(Role.LEADER);

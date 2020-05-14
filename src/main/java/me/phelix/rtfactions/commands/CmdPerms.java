@@ -38,22 +38,22 @@ public final class CmdPerms extends SubCommand implements TabCompleter {
 
     @Override
     public void execute(CommandSender sender, String[] args){
-        if(args.length == 5){
+        if(args.length == 4){
             try {
-                final Role role = Role.valueOf(args[2]);
-                final Permission permission = Permission.valueOf(args[3]);
+                final Role role = Role.valueOf(args[1]);
+                final Permission permission = Permission.valueOf(args[2]);
 
-                if(args[4].equalsIgnoreCase("true")){
+                if(args[3].equalsIgnoreCase("true")){
                     myFaction.getPermissions().addPermission(role, permission);
-                    sendMessage(Message.commandPermAdded, args[3], args[2]);
+                    sendMessage(Message.commandPermAdded, args[2], args[1]);
                 } else if(args[4].equalsIgnoreCase("false")){
                     myFaction.getPermissions().removePermission(role, permission);
-                    sendMessage(Message.commandPermRemoved, args[3], args[2]);
+                    sendMessage(Message.commandPermRemoved, args[2], args[1]);
                 } else {
                     fme.sendMessage(toString());
                 }
             }catch (IllegalArgumentException e){
-                sendMessage(Message.commandPermRoleNotExist, args[2], args[3]);
+                sendMessage(Message.commandPermRoleNotExist, args[1], args[2]);
             }
         } else {
             fme.sendMessage(toString());

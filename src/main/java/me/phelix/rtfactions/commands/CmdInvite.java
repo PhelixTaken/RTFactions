@@ -34,8 +34,8 @@ public final class CmdInvite extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args){
-        if(args.length == 2){
-            final String name = args[1];
+        if(args.length == 1){
+            final String name = args[0];
             final Player player = Bukkit.getPlayer(name);
             if(player == null){
                 sendMessage(Message.commandInvitePlayerNotExist, name);

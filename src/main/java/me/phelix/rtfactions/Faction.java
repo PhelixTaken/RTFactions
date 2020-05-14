@@ -33,7 +33,8 @@ public final class Faction {
     private final Set<FPlayer> players = new HashSet<>();
     private final Set<Faction> allies = new HashSet<>();
     private transient Set<FLocation> claimedChunks = new HashSet<>();
-    private final Set<FPlayer> invitations = new HashSet<>();
+    private final transient Set<FPlayer> invitations = new HashSet<>();
+    private final transient Set<Faction> allyRequests = new HashSet<>();
     private String description;
     private FactionPermission factionPermission;
     private int power;
@@ -168,6 +169,18 @@ public final class Faction {
 
     public FPlayer getLeader(){
         return getPlayersByRole(Role.LEADER).stream().findFirst().orElse(null);
+    }
+
+    public Set<Faction> getAllyRequests(){
+        return allyRequests;
+    }
+
+    public void addAllyRequest(Faction ally){
+        allyRequests.add(ally);
+    }
+
+    public void removeAllyRequest(Faction ally){
+        allyRequests.remove(ally);
     }
 
 }

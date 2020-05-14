@@ -25,6 +25,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,6 +41,8 @@ public final class CommandHandler implements CommandExecutor {
         commands.add(new CmdJoin());
         commands.add(new CmdWho());
         commands.add(new CmdPerms(plugin));
+        commands.add(new CmdDefaultRole());
+        commands.add(new CmdAddAlly());
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -61,7 +64,7 @@ public final class CommandHandler implements CommandExecutor {
                             if (subCommand.setCommandSender(sender, plugin, plugin.getPlayerHandler(), plugin.getFactionHandler(), plugin.getChunkHandler())) {
 
                                 if (subCommand.hasPermission()) {
-                                    subCommand.execute(sender, args);
+                                    subCommand.execute(sender, Arrays.copyOfRange(args, 1, args.length));
                                 }
                             }
                         }

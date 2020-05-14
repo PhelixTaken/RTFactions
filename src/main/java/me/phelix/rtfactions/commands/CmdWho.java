@@ -39,13 +39,13 @@ public final class CmdWho extends SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args){
         Faction faction = fme.getFaction();
-        if(args.length == 2){
-            faction = factionHandler.getByName(args[1]);
+        if(args.length == 1){
+            faction = factionHandler.getByName(args[0]);
             if(faction == null){
-                sendMessage(Message.commandInfoFactionNotExist, args[1]);
+                sendMessage(Message.commandInfoFactionNotExist, args[0]);
                 return;
             }
-        } else if(args.length > 2) {
+        } else if(args.length > 1) {
             sendMessage(toString());
         }
 

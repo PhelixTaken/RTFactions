@@ -52,7 +52,11 @@ public final class Message {
     public static String commandPermRemoved = "&7You have removed the permission &6%s &7from &6%s&7!";
     public static String commandPermRoleNotExist = "&7The permission &6%s &7or the role &6%s &7does not exist!";
 
+    public static String commandDRoleLeader = "&7You can't set the default role to leader!";
+    public static String commandDRoleSet = "&7Successfully set the default role to &6%s";
+    public static String commandDRoleNotExist = "&7The role &6%s &7does not exist!";
 
+    public static String commandAllySent = "&7Successfully sent an ally request to &6%s&7!";
 
 
 

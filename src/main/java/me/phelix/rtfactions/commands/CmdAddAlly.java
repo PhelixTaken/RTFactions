@@ -17,50 +17,39 @@
 
 package me.phelix.rtfactions.commands;
 
-import me.phelix.rtfactions.FPlayer;
 import me.phelix.rtfactions.Faction;
-import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
 
-public final class CmdJoin extends SubCommand {
+public final class CmdAddAlly extends SubCommand {
 
-    public CmdJoin(){
-        super(new String[]{"join"}, new String[]{"<faction>"}, "Join a faction", Permission.NONE, false);
+    public CmdAddAlly(){
+        super(new String[]{"ally", "addally"}, new String[]{"<faction>"}, "Ally another faction", Permission.ADD_ALLY, true);
     }
 
     @Override
     public void execute(CommandSender sender, String[] args){
-        if(args.length == 1){
-            final Faction faction = factionHandler.getByName(args[0]);
-            if(faction.getInvitations().contains(fme)) {
-                join(fme, faction);
+
+        if(args.length == 1) {
+
+            final Faction ally = factionHandler.getByName(args[0]);
+            if(ally == null) {
+                sendMessage(Message.commandInfoFactionNotExist, args[0]);
                 return;
             }
 
-            if(faction.isOpen()){
-                join(fme, faction);
-            } else {
-                sendMessage(Message.faction_closed, faction.getName());
-            }
+            myFaction.addAllyRequest(ally);
+            sendMessage(Message.commandAllySent, ally.getName());
+
+
+
 
         } else {
             sendMessage(toString());
         }
     }
 
-    private void join(FPlayer fPlayer, Faction faction){
-        fPlayer.getFaction().removePlayer(fPlayer);
-        fPlayer.setFaction(faction);
-        fPlayer.setRole(faction.getDefaultRole());
-        faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
-        faction.addPlayer(fPlayer);
-        faction.deinvite(fPlayer);
-        sendMessage(Message.faction_join_player, faction.getName());
-        faction.broadCast((color(String.format(Message.faction_join_broadcast, fPlayer.getPlayer().getName()))));
-    }
-
-
 }
+
