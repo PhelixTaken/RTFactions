@@ -79,4 +79,8 @@ public final class FPlayer {
     public Player getPlayer(){
         return Bukkit.getPlayer(UUID.fromString(id));
     }
+
+    public String getName(){
+       return Bukkit.getOfflinePlayer(UUID.fromString(id)).getName();
+    }
 }

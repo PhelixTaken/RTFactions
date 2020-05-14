@@ -18,6 +18,7 @@
 package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.Faction;
+import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
@@ -34,9 +35,10 @@ public final class CmdJoin extends SubCommand {
         if(args.length == 2){
             final Faction faction = factionHandler.getByName(args[1]);
             if(faction.getInvitations().contains(fme)) {
+                fme.getFaction().removePlayer(fme);
                 fme.setFaction(faction);
                 fme.setRole(faction.getDefaultRole());
-                faction.setTotalPower(faction.getTotalPower() + 10);
+                faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
                 faction.addPlayer(fme);
                 faction.deinvite(fme);
                 sendMessage(Message.faction_join_player, faction.getName());
@@ -45,9 +47,10 @@ public final class CmdJoin extends SubCommand {
             }
 
             if(faction.isOpen()){
+                fme.getFaction().removePlayer(fme);
                 fme.setFaction(faction);
                 fme.setRole(faction.getDefaultRole());
-                faction.setTotalPower(faction.getTotalPower() + 10);
+                faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
                 faction.addPlayer(fme);
                 faction.deinvite(fme);
                 sendMessage(Message.faction_join_player, faction.getName());

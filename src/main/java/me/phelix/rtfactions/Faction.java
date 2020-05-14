@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class Faction {
 
@@ -158,4 +159,13 @@ public final class Faction {
             }
         }
     }
+
+    public final Set<FPlayer> getPlayersByRole(Role role) {
+        return getPlayers().stream().filter(fPlayer -> fPlayer.getRole() == role).collect(Collectors.toSet());
+    }
+
+    public FPlayer getLeader(){
+        return getPlayersByRole(Role.LEADER).stream().findFirst().orElse(null);
+    }
+
 }

@@ -38,25 +38,25 @@ public final class CmdInvite extends SubCommand {
             final String name = args[1];
             final Player player = Bukkit.getPlayer(name);
             if(player == null){
-                sendMessage(Message.player_does_not_exist, name);
+                sendMessage(Message.commandInvitePlayerNotExist, name);
                 return;
             }
 
             final FPlayer target = playerHandler.getByPlayer(player);
 
             if(myFaction.getPlayers().contains(target)) {
-                sendMessage(Message.player_already_in_same_faction, name);
+                sendMessage(Message.commandInvitePlayerAlreadyInSameFaction, name);
                 return;
             }
 
             if(target.hasFaction() && !myFaction.getPlayers().contains(target)){
-                sendMessage(Message.player_already_in_faction, name);
+                sendMessage(Message.commandPlayerAlreadyInFaction, name);
                 return;
             }
 
-            sendMessage(Message.succesfully_invited, name);
+            sendMessage(Message.commandInviteSuccessfullyInvited, name);
             final JsonMessage message = new JsonMessage();
-            message.append(color(String.format(Message.successfully_invited_player, name, myFaction.getName()))).setClickAsExecuteCmd("/f join " + myFaction.getName()).save();
+            message.append(color(String.format(Message.commandInviteSuccessfullyInvitedPlayer, fme.getPlayer().getName(), myFaction.getName()))).setClickAsExecuteCmd("/f join " + myFaction.getName()).save();
             message.send(target.getPlayer());
             myFaction.invite(target);
 

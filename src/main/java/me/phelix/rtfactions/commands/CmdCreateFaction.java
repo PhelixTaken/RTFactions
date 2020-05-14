@@ -17,6 +17,7 @@
 
 package me.phelix.rtfactions.commands;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.Role;
@@ -24,6 +25,7 @@ import me.phelix.rtfactions.utils.SubCommand;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public final class CmdCreateFaction extends SubCommand {
 
@@ -33,18 +35,19 @@ public final class CmdCreateFaction extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
+
         if (args.length == 1 || args.length > 2) {
             fme.sendMessage(toString());
             return;
         }
 
         if (plugin.getFactionHandler().getFactionMap().containsKey(args[1])) {
-            sendMessage(Message.faction_already_exists, args[1]);
+            sendMessage(Message.commandCreatedFactionAlreadyExists, args[1]);
             return;
         }
 
         if (fme.hasFaction()) {
-            sendMessage(Message.already_in_faction);
+            sendMessage(Message.commandCreatedAlreadyInFaction);
             return;
         }
 
@@ -60,7 +63,7 @@ public final class CmdCreateFaction extends SubCommand {
         final FactionPermission factionPermission = new FactionPermission();
         factionPermission.setDefaultPermissions();
         faction.setPermission(factionPermission);
-        sendMessage(Message.successfully_created_faction, faction.getName());
+        sendMessage(Message.commandCreatedFaction, faction.getName());
     }
 }
 

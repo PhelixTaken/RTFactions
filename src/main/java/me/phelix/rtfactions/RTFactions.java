@@ -23,6 +23,7 @@ import me.phelix.rtfactions.events.JoinEvent;
 import me.phelix.rtfactions.handlers.ChunkHandler;
 import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.handlers.PlayerHandler;
+import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import net.prosavage.baseplugin.serializer.Persist;
 import org.bukkit.Bukkit;
@@ -38,6 +39,7 @@ public final class RTFactions extends JavaPlugin {
     private PlayerHandler playerHandler;
     private ChunkHandler chunkHandler;
     private final Message message = new Message();
+    private final Config config = new Config();
 
     public void onEnable() {
         getCommand("f").setExecutor(new CommandHandler(this));
@@ -74,6 +76,7 @@ public final class RTFactions extends JavaPlugin {
         final File factionFile = new File(getDataFolder() + File.separator + "Factions", "factions.json");
         final File worldFile = new File(getDataFolder() + File.separator + "Factions", "world.json");
         final File messagesFile = new File(getDataFolder() + File.separator + "Factions", "messages.json");
+        final File configFile = new File(getDataFolder() + File.separator + "Factions", "config.json");
 
         final Persist persist = new Persist();
 
@@ -90,6 +93,9 @@ public final class RTFactions extends JavaPlugin {
 
         if (messagesFile.exists())
             message.load(persist, messagesFile);
+
+        if(configFile.exists())
+            config.load(persist, configFile);
 
         if (!factionFile.exists()) return;
 
@@ -122,6 +128,7 @@ public final class RTFactions extends JavaPlugin {
         final File factionFile = new File(getDataFolder() + File.separator + "Factions", "factions.json");
         final File worldFile = new File(getDataFolder() + File.separator + "Factions", "world.json");
         final File messageFile = new File(getDataFolder() + File.separator + "Factions", "messages.json");
+        final File configFile = new File(getDataFolder() + File.separator + "Factions", "config.json");
 
         final Persist persist = new Persist();
 
@@ -137,6 +144,7 @@ public final class RTFactions extends JavaPlugin {
         persist.save(false, factionHandler.getFactionMap(), factionFile);
         persist.save(false, chunkHandler.getChunkMap(), worldFile);
 
+        config.save(persist, configFile);
         message.save(persist, messageFile);
     }
 

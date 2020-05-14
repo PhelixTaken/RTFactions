@@ -76,7 +76,7 @@ public abstract class SubCommand {
             return false;
 
         if (factionNeeded && !fme.hasFaction()) {
-            sendMessage(Message.command_faction_needed);
+            sendMessage(Message.commandFactionNeeded);
             return false;
         }
 
@@ -84,7 +84,7 @@ public abstract class SubCommand {
             return true;
 
         if (!myFaction.getPermissions().hasPermission(fme.getRole(), permission)) {
-            sendMessage(Message.command_perm_needed, permission.name().toLowerCase());
+            sendMessage(Message.commandPermissionNeeded, permission.name().toLowerCase());
             return false;
         }
 
