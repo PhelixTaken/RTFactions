@@ -17,6 +17,7 @@
 
 package me.phelix.rtfactions.commands;
 
+import me.phelix.rtfactions.FPlayer;
 import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
@@ -35,26 +36,12 @@ public final class CmdJoin extends SubCommand {
         if(args.length == 2){
             final Faction faction = factionHandler.getByName(args[1]);
             if(faction.getInvitations().contains(fme)) {
-                fme.getFaction().removePlayer(fme);
-                fme.setFaction(faction);
-                fme.setRole(faction.getDefaultRole());
-                faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
-                faction.addPlayer(fme);
-                faction.deinvite(fme);
-                sendMessage(Message.faction_join_player, faction.getName());
-                faction.broadCast((color(String.format(Message.faction_join_broadcast, fme.getPlayer().getName()))));
+                join(fme, faction);
                 return;
             }
 
             if(faction.isOpen()){
-                fme.getFaction().removePlayer(fme);
-                fme.setFaction(faction);
-                fme.setRole(faction.getDefaultRole());
-                faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
-                faction.addPlayer(fme);
-                faction.deinvite(fme);
-                sendMessage(Message.faction_join_player, faction.getName());
-                faction.broadCast((color(String.format(Message.faction_join_broadcast, fme.getPlayer().getName()))));
+                join(fme, faction);
             } else {
                 sendMessage(Message.faction_closed, faction.getName());
             }
@@ -63,5 +50,17 @@ public final class CmdJoin extends SubCommand {
             sendMessage(toString());
         }
     }
+
+    private void join(FPlayer fPlayer, Faction faction){
+        fPlayer.getFaction().removePlayer(fPlayer);
+        fPlayer.setFaction(faction);
+        fPlayer.setRole(faction.getDefaultRole());
+        faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
+        faction.addPlayer(fPlayer);
+        faction.deinvite(fPlayer);
+        sendMessage(Message.faction_join_player, faction.getName());
+        faction.broadCast((color(String.format(Message.faction_join_broadcast, fPlayer.getPlayer().getName()))));
+    }
+
 
 }

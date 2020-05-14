@@ -32,6 +32,8 @@ public final class Message {
     public static String commandFactionNeeded = "&7You must be in a faction to do that!";
     public static String commandPermissionNeeded = "&7Your faction does not allow you to do this, it requires the action &6%s&7!";
 
+    public static String commandInfoFactionNotExist = "&6%s &7does not exists!";
+
     public static String command_help = "&6f %s &8> &7";
 
     public static String commandPlayerAlreadyInFaction = "&6%s &7is already in a faction!";
@@ -46,7 +48,10 @@ public final class Message {
     public static String commandInviteSuccessfullyInvited = "&7Successfully invited &6%s";
     public static String commandInviteSuccessfullyInvitedPlayer = "&6%s &7has invited you. Click here to join &6%s&7!";
 
-    public static String commandInfoFactionNotExist = "&6%s &7does not exists!";
+    public static String commandPermAdded = "&7You have added the permission &6%s &7to &6%s&7!";
+    public static String commandPermRemoved = "&7You have removed the permission &6%s &7from &6%s&7!";
+    public static String commandPermRoleNotExist = "&7The permission &6%s &7or the role &6%s &7does not exist!";
+
 
 
 

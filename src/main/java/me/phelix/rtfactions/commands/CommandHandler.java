@@ -39,6 +39,7 @@ public final class CommandHandler implements CommandExecutor {
         commands.add(new CmdInvite());
         commands.add(new CmdJoin());
         commands.add(new CmdWho());
+        commands.add(new CmdPerms(plugin));
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
