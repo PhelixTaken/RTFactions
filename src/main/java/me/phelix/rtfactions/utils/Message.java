@@ -57,6 +57,10 @@ public final class Message {
     public static String commandDRoleNotExist = "&7The role &6%s &7does not exist!";
 
     public static String commandAllySent = "&7Successfully sent an ally request to &6%s&7!";
+    public static String commandAllyRequest = "&6%s &7wants to be an ally! Click here to be an ally!";
+    public static String commandAllyAlready = "&7Your faction is already an ally with &6%s&7!";
+    public static String commandAllySelf = "&7You can't ally your self!";
+    public static String commandAllySuccess = "&7Your faction is now an ally with &6%s&7!";
 
 
 

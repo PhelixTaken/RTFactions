@@ -46,7 +46,7 @@ public final class CmdPerms extends SubCommand implements TabCompleter {
                 if(args[3].equalsIgnoreCase("true")){
                     myFaction.getPermissions().addPermission(role, permission);
                     sendMessage(Message.commandPermAdded, args[2], args[1]);
-                } else if(args[4].equalsIgnoreCase("false")){
+                } else if(args[3].equalsIgnoreCase("false")){
                     myFaction.getPermissions().removePermission(role, permission);
                     sendMessage(Message.commandPermRemoved, args[2], args[1]);
                 } else {

@@ -62,7 +62,7 @@ public final class CmdWho extends SubCommand {
         final List<String> msges = new ArrayList<>();
         final List<String> allies = new ArrayList<>();
 
-        for(final Faction ally : faction.getAllies()){
+        for(final Faction ally : faction.getAllies(factionHandler)){
             allies.add(ally.getName());
         }
 

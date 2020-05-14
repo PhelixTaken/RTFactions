@@ -17,7 +17,9 @@
 
 package me.phelix.rtfactions.commands;
 
+import me.phelix.rtfactions.FPlayer;
 import me.phelix.rtfactions.Faction;
+import me.phelix.rtfactions.utils.JsonMessage;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
@@ -40,11 +42,49 @@ public final class CmdAddAlly extends SubCommand {
                 return;
             }
 
+            if(myFaction.equals(ally)){
+                sendMessage(Message.commandAllySelf);
+                return;
+            }
+
+            if(myFaction.getAllies(factionHandler).contains(ally)){
+                sendMessage(Message.commandAllyAlready, args[0]);
+                return;
+            }
+
             myFaction.addAllyRequest(ally);
             sendMessage(Message.commandAllySent, ally.getName());
+            final JsonMessage message = new JsonMessage();
+            message.append(color(String.format(Message.commandAllyRequest, myFaction.getName())))
+                    .setClickAsExecuteCmd("/f ally " + myFaction.getName() + " true").save();
 
 
+            for(final FPlayer fPlayer : ally.getPlayersByPermission(Permission.ADD_ALLY)){
+                if(fPlayer.getPlayer() == null) continue;
+                message.send(fPlayer.getPlayer());
+            }
 
+        } else if(args.length == 2){
+
+            if(args[1].equalsIgnoreCase("true")){
+
+                final Faction faction = factionHandler.getByName(args[0]);
+
+                if(faction == null){
+                    sendMessage(Message.commandInfoFactionNotExist, args[0]);
+                    return;
+                }
+
+                if(faction.getAllyRequests().contains(myFaction)){
+                    myFaction.addAlly(faction);
+                    faction.addAlly(myFaction);
+
+                    myFaction.broadCast(color(String.format(Message.commandAllySuccess, faction.getName())));
+                    faction.broadCast(color(String.format(Message.commandAllySuccess, myFaction.getName())));
+                    faction.removeAllyRequest(myFaction);
+                }
+
+            }
 
         } else {
             sendMessage(toString());

@@ -17,8 +17,10 @@
 
 package me.phelix.rtfactions;
 
+import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
+import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +33,7 @@ public final class Faction {
 
     private final String name;
     private final Set<FPlayer> players = new HashSet<>();
-    private final Set<Faction> allies = new HashSet<>();
+    private final Set<String> allyNames = new HashSet<>();
     private transient Set<FLocation> claimedChunks = new HashSet<>();
     private final transient Set<FPlayer> invitations = new HashSet<>();
     private final transient Set<Faction> allyRequests = new HashSet<>();
@@ -56,10 +58,17 @@ public final class Faction {
     }
 
     @NotNull
-    public Set<Faction> getAllies() {
-        return allies;
+    public Set<String> getAllyNames(){
+        return allyNames;
     }
 
+    public Set<Faction> getAllies(FactionHandler factionHandler){
+        final Set<Faction> factions = new HashSet<>();
+        for(String string : getAllyNames()) {
+            factions.add(factionHandler.getByName(string));
+        }
+        return factions;
+    }
 
     public void addPlayer(FPlayer fPlayer) {
         players.add((FPlayer) fPlayer);
@@ -70,11 +79,11 @@ public final class Faction {
     }
 
     public void addAlly(Faction faction) {
-        allies.add(faction);
+        allyNames.add(faction.getName());
     }
 
     public void removeAlly(Faction faction) {
-        allies.remove(faction);
+        allyNames.remove(faction.getName());
     }
 
     @NotNull
@@ -167,10 +176,12 @@ public final class Faction {
         return getPlayers().stream().filter(fPlayer -> fPlayer.getRole() == role).collect(Collectors.toSet());
     }
 
+    @NotNull
     public FPlayer getLeader(){
-        return getPlayersByRole(Role.LEADER).stream().findFirst().orElse(null);
+        return getPlayersByRole(Role.LEADER).stream().findFirst().get();
     }
 
+    @NotNull
     public Set<Faction> getAllyRequests(){
         return allyRequests;
     }
@@ -181,6 +192,17 @@ public final class Faction {
 
     public void removeAllyRequest(Faction ally){
         allyRequests.remove(ally);
+    }
+
+    @NotNull
+    public Set<FPlayer> getPlayersByPermission(Permission permission){
+        final Set<FPlayer> fPlayers = new HashSet<>();
+        for(final FPlayer fPlayer : players) {
+            if(factionPermission.hasPermission(fPlayer.getRole(), permission)){
+                fPlayers.add(fPlayer);
+            }
+        }
+        return fPlayers;
     }
 
 }
