@@ -17,15 +17,13 @@
 
 package me.phelix.rtfactions.commands;
 
-import me.clip.placeholderapi.PlaceholderAPI;
 import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.Role;
-import me.phelix.rtfactions.utils.SubCommand;
+import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public final class CmdCreateFaction extends SubCommand {
 

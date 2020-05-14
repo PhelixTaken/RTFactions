@@ -20,7 +20,7 @@ package me.phelix.rtfactions.commands;
 import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
-import me.phelix.rtfactions.utils.SubCommand;
+import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
 

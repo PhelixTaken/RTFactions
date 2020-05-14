@@ -46,6 +46,8 @@ public final class Message {
     public static String commandInviteSuccessfullyInvited = "&7Successfully invited &6%s";
     public static String commandInviteSuccessfullyInvitedPlayer = "&6%s &7has invited you. Click here to join &6%s&7!";
 
+    public static String commandInfoFactionNotExist = "&6%s &7does not exists!";
+
 
 
 

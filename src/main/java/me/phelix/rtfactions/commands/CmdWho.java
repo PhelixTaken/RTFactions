@@ -19,7 +19,7 @@ package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Message;
-import me.phelix.rtfactions.utils.SubCommand;
+import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -38,22 +38,18 @@ public final class CmdWho extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args){
-        Faction faction = null;
-        if(args.length == 1)
-            faction = myFaction;
-        else if(args.length == 2) {
-            faction = plugin.getFactionHandler().getByName(args[1]);
+        Faction faction = fme.getFaction();
+        if(args.length == 2){
+            faction = factionHandler.getByName(args[1]);
             if(faction == null){
-                sendMessage(Message.show_not_exist, args[1]);
+                sendMessage(Message.commandInfoFactionNotExist, args[1]);
                 return;
             }
-        }
-        else {
-            fme.sendMessage(toString());
-            return;
+        } else if(args.length > 2) {
+            sendMessage(toString());
         }
 
-        if(faction == null || faction.getName().equalsIgnoreCase("Wilderness")){
+        if(faction.getName().equalsIgnoreCase("Wilderness")){
             sendMessage(Message.commandPlayerFactionNeeded);
             return;
         }

@@ -32,7 +32,7 @@ public final class Faction {
     private final String name;
     private final Set<FPlayer> players = new HashSet<>();
     private final Set<Faction> allies = new HashSet<>();
-    private final transient Set<FLocation> claimedChunks = new HashSet<>();
+    private transient Set<FLocation> claimedChunks = new HashSet<>();
     private final Set<FPlayer> invitations = new HashSet<>();
     private String description;
     private FactionPermission factionPermission;
@@ -95,6 +95,8 @@ public final class Faction {
 
     @NotNull
     public Set<FLocation> getClaims() {
+        if(claimedChunks == null)
+            claimedChunks = new HashSet<>();
         return claimedChunks;
     }
 

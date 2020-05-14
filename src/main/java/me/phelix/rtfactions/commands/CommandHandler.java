@@ -18,7 +18,7 @@
 package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.RTFactions;
-import me.phelix.rtfactions.utils.SubCommand;
+import me.phelix.rtfactions.utils.commands.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -38,6 +38,7 @@ public final class CommandHandler implements CommandExecutor {
         commands.add(new CmdCreateFaction());
         commands.add(new CmdInvite());
         commands.add(new CmdJoin());
+        commands.add(new CmdWho());
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.phelix.rtfactions.utils;
+package me.phelix.rtfactions.utils.commands;
 
 import me.phelix.rtfactions.FPlayer;
 import me.phelix.rtfactions.Faction;
@@ -23,6 +23,7 @@ import me.phelix.rtfactions.RTFactions;
 import me.phelix.rtfactions.handlers.ChunkHandler;
 import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.handlers.PlayerHandler;
+import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

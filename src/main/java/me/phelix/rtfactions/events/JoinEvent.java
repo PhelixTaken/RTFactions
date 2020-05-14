@@ -40,7 +40,7 @@ public final class JoinEvent implements Listener {
         if (!plugin.getPlayerHandler().getPlayerMap().containsKey(player.getUniqueId())) {
             final FPlayer fPlayer = new FPlayer(player.getUniqueId().toString());
             plugin.getPlayerHandler().getPlayerMap().put(player.getUniqueId(), fPlayer);
-            final Faction faction = plugin.getFactionHandler().getByName("Wilderness");
+            final Faction faction = plugin.getFactionHandler().getWilderness();
             fPlayer.setRole(Role.NONE);
             fPlayer.setFaction(faction);
             faction.addPlayer(fPlayer);
