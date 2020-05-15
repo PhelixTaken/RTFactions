@@ -39,7 +39,7 @@ public final class CmdJoin extends SubCommand {
                 sendMessage(Message.commandPlayerSelfAlreadyInFaction);
                 return;
             }
-            
+
             final Faction faction = factionHandler.getByName(args[0]);
             if(faction.getInvitations().contains(fme)) {
                 join(fme, faction);
@@ -49,7 +49,7 @@ public final class CmdJoin extends SubCommand {
             if(faction.isOpen()){
                 join(fme, faction);
             } else {
-                sendMessage(Message.faction_closed, faction.getName());
+                sendMessage(Message.commandJoinFactionClosed, faction.getName());
             }
 
         } else {
@@ -64,8 +64,8 @@ public final class CmdJoin extends SubCommand {
         faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
         faction.addPlayer(fPlayer);
         faction.deinvite(fPlayer);
-        sendMessage(Message.faction_join_player, faction.getName());
-        faction.broadCast((color(String.format(Message.faction_join_broadcast, fPlayer.getPlayer().getName()))));
+        sendMessage(Message.commandJoinFactionPlayer, faction.getName());
+        faction.broadCast((color(String.format(Message.commandJoinFactionBroadcast, fPlayer.getPlayer().getName()))));
     }
 
 

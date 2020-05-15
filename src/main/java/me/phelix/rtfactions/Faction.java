@@ -19,13 +19,18 @@ package me.phelix.rtfactions;
 
 import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.utils.Role;
+import me.phelix.rtfactions.utils.Warp;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,6 +42,7 @@ public final class Faction {
     private transient Set<FLocation> claimedChunks = new HashSet<>();
     private final transient Set<FPlayer> invitations = new HashSet<>();
     private final transient Set<Faction> allyRequests = new HashSet<>();
+    private final Map<String, Warp> warps = new HashMap<>();
     private String description;
     private FactionPermission factionPermission;
     private int power;
@@ -172,6 +178,7 @@ public final class Faction {
         }
     }
 
+    @NotNull
     public final Set<FPlayer> getPlayersByRole(Role role) {
         return getPlayers().stream().filter(fPlayer -> fPlayer.getRole() == role).collect(Collectors.toSet());
     }
@@ -195,14 +202,32 @@ public final class Faction {
     }
 
     @NotNull
-    public Set<FPlayer> getPlayersByPermission(Permission permission){
+    public Set<FPlayer> getPlayersByPermission(Permission permission) {
         final Set<FPlayer> fPlayers = new HashSet<>();
-        for(final FPlayer fPlayer : players) {
-            if(factionPermission.hasPermission(fPlayer.getRole(), permission)){
+        for (final FPlayer fPlayer : players) {
+            if (factionPermission.hasPermission(fPlayer.getRole(), permission)) {
                 fPlayers.add(fPlayer);
             }
         }
         return fPlayers;
+    }
+
+    @NotNull
+    public Map<String, Warp> getWarps() {
+        return warps;
+    }
+
+    @Nullable
+    public Warp getWarp(String name) {
+        return warps.get(name);
+    }
+
+    public void addWarp(String name, @Nullable String password, Location location){
+        warps.put(name, new Warp(name, password, location.getWorld().getUID().toString(), location.getX(), location.getY(), location.getZ()));
+    }
+
+    public void removeWarp(String name) {
+        warps.remove(name);
     }
 
 }

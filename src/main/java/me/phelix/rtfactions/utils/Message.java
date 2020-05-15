@@ -34,7 +34,7 @@ public final class Message {
 
     public static String commandInfoFactionNotExist = "&6%s &7does not exists!";
 
-    public static String command_help = "&6f %s &8> &7";
+    public static String commandHelp = "&6f %s &8> &7";
 
     public static String commandPlayerAlreadyInFaction = "&6%s &7is already in a faction!";
     public static String commandPlayerFactionNeeded = "&7You need to be in a faction to do that!";
@@ -65,12 +65,9 @@ public final class Message {
 
     public static String commandDescriptionSet = "You have updated your factions description to &6%s";
 
-    public static String show_not_exist = "&6%s &7does not exist!";
-
-
-    public static String faction_join_broadcast = "&6%s &7has joined the faction!";
-    public static String faction_join_player = "&7You have successfully joined &6%s&7!";
-    public static String faction_closed = "&6%s &7is closed!";
+    public static String commandJoinFactionBroadcast = "&6%s &7has joined the faction!";
+    public static String commandJoinFactionPlayer = "&7You have successfully joined &6%s&7!";
+    public static String commandJoinFactionClosed = "&6%s &7is closed!";
 
 
     public static List<String> show = new ArrayList<String>() {{
