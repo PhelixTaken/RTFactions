@@ -17,6 +17,8 @@
 
 package me.phelix.rtfactions.commands;
 
+import me.phelix.rtfactions.Faction;
+import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
@@ -28,8 +30,36 @@ public final class CmdSetWarp extends SubCommand {
     }
 
     @Override
-    public void execute(CommandSender sender, String[] args){
-        
+    public void execute(CommandSender sender, String[] args) {
+        if (args.length > 0 && args.length < 3) {
+
+            final String name = args[0];
+            String password = null;
+            if (args.length == 2)
+                password = args[1];
+
+            if (myFaction.warpExists(name)) {
+                sendMessage(Message.commandSetWarpExists, name);
+                return;
+            }
+
+            final Faction chunk = chunkHandler.getFactionFromChunk(fme.getPlayer().getLocation());
+            if (!chunk.equals(myFaction) && !chunk.equals(factionHandler.getWilderness())) {
+                sendMessage(Message.commandSetWarpTerritory);
+                return;
+            }
+
+            if (password != null) {
+                sendMessage(Message.commandSetWarpWithPassword, name, password);
+                myFaction.addWarp(name, password, fme.getPlayer().getLocation());
+            } else {
+                sendMessage(Message.commandSetWarpWithPassword, name);
+                myFaction.addWarp(name, null, fme.getPlayer().getLocation());
+            }
+
+        } else {
+            sendMessage(toString());
+        }
     }
 
 }

@@ -230,4 +230,8 @@ public final class Faction {
         warps.remove(name);
     }
 
+    public boolean warpExists(String name){
+        return warps.containsKey(name);
+    }
+
 }
