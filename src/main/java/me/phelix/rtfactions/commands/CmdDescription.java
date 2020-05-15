@@ -18,31 +18,26 @@
 package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.utils.Message;
-import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
 
-public final class CmdDefaultRole extends SubCommand {
+public final class CmdDescription extends SubCommand {
 
-    public CmdDefaultRole(){
-        super(new String[]{"defaultrole", "dfr", "defaultr"}, new String[]{"<role>"}, "Set the default faction role", Permission.DEFAULT_ROLE, true);
+    public CmdDescription(){
+        super(new String[]{"description", "desc"}, new String[]{"<description>"}, "Set the description of the faction", Permission.SET_DESCRIPTION, true);
     }
 
     @Override
     public void execute(CommandSender sender, String[] args){
-        if(args.length == 1){
-            try {
-                final Role role = Role.valueOf(args[0].toUpperCase());
-                if(role == Role.LEADER){
-                    sendMessage(Message.commandDRoleLeader);
-                    return;
-                }
-                myFaction.setDefaultRole(role);
-                sendMessage(Message.commandDRoleSet, role.toString().toLowerCase());
-            } catch (IllegalArgumentException e){
-                sendMessage(Message.commandDRoleNotExist, args[0]);
+        if(args.length > 0){
+            final StringBuilder builder = new StringBuilder();
+            for(int i = 0; i < args.length; i++){
+                builder.append(args[i]).append(" ");
             }
+            myFaction.setDescription(builder.toString());
+            sendMessage(Message.commandDescriptionSet, builder.toString());
+
         } else {
             sendMessage(toString());
         }

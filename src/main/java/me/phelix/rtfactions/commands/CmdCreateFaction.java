@@ -35,7 +35,7 @@ public final class CmdCreateFaction extends SubCommand {
     public void execute(CommandSender sender, String[] args) {
 
         if (args.length != 1) {
-            fme.sendMessage(toString());
+            sendMessage(toString());
             return;
         }
 

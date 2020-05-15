@@ -38,6 +38,7 @@ public final class Message {
 
     public static String commandPlayerAlreadyInFaction = "&6%s &7is already in a faction!";
     public static String commandPlayerFactionNeeded = "&7You need to be in a faction to do that!";
+    public static String commandPlayerSelfAlreadyInFaction = "&7You are already in a faction!";
 
     public static String commandCreatedFaction = "&7Successfully created &6%s";
     public static String commandCreatedAlreadyInFaction = "&7You are already in a faction!";
@@ -62,7 +63,7 @@ public final class Message {
     public static String commandAllySelf = "&7You can't ally your self!";
     public static String commandAllySuccess = "&7Your faction is now an ally with &6%s&7!";
 
-
+    public static String commandDescriptionSet = "You have updated your factions description to &6%s";
 
     public static String show_not_exist = "&6%s &7does not exist!";
 

@@ -66,7 +66,7 @@ public final class CmdWho extends SubCommand {
             allies.add(ally.getName());
         }
 
-        for(String string : Message.show){
+        for(final String string : Message.show){
             final String str = string.replace("{faction_name}", faction.getName())
                     .replace("{faction_leader}", faction.getLeader().getPlayer().getName())
                     .replace("{faction_members}", names.toString()

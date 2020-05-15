@@ -34,6 +34,12 @@ public final class CmdJoin extends SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args){
         if(args.length == 1){
+
+            if(fme.hasFaction()){
+                sendMessage(Message.commandPlayerSelfAlreadyInFaction);
+                return;
+            }
+            
             final Faction faction = factionHandler.getByName(args[0]);
             if(faction.getInvitations().contains(fme)) {
                 join(fme, faction);
