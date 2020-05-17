@@ -25,8 +25,11 @@ public final class Config {
 
     private transient Config instance = this;
 
+    public static int factionClaimPower = 1;
     public static int factionPowerPerPlayer = 10;
-    public static int claimPower = 1;
+
+    public static int factionNameMinLength = 4;
+    public static int factionNameMaxLength = 16;
 
 
     public final void save(Persist persist, File file){

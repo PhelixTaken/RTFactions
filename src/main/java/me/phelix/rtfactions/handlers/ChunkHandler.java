@@ -17,9 +17,9 @@
 
 package me.phelix.rtfactions.handlers;
 
-import me.phelix.rtfactions.RTFactions;
 import me.phelix.rtfactions.FLocation;
 import me.phelix.rtfactions.Faction;
+import me.phelix.rtfactions.RTFactions;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 
@@ -70,20 +70,32 @@ public final class ChunkHandler {
         chunkMap.put(fLocation, faction.getName());
     }
 
-    public void removeChunk(FLocation fLocation) {
-        main.getFactionHandler().getByName(chunkMap.get(fLocation)).getClaims().remove(fLocation);
+    public void unclaimChunk(Chunk chunk) {
+        final FLocation fLocation = new FLocation(chunk);
+        getFactionFromChunk(chunk).removeClaim(fLocation);
+        chunkMap.remove(fLocation);
+    }
+
+    public void unclaimChunk(Location location) {
+        final FLocation fLocation = new FLocation(location);
+        getFactionFromChunk(fLocation).removeClaim(fLocation);
+        chunkMap.remove(fLocation);
+    }
+
+    public void unclaimChunk(FLocation fLocation) {
+        getFactionFromChunk(fLocation).removeClaim(fLocation);
         chunkMap.remove(fLocation);
     }
 
     public void removeAllChunks(Faction faction) {
-        for(final FLocation fLocation : faction.getClaims()) {
+        for (final FLocation fLocation : faction.getClaims()) {
             chunkMap.remove(fLocation);
         }
         faction.getClaims().clear();
     }
 
     public Faction getFactionFromChunk(Chunk chunk) {
-        if(chunkMap.get(new FLocation(chunk)) == null) {
+        if (chunkMap.get(new FLocation(chunk)) == null) {
             return main.getFactionHandler().getWilderness();
         }
         return main.getFactionHandler().getByName(chunkMap.get(new FLocation(chunk)));

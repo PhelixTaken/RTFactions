@@ -18,6 +18,7 @@
 package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.Faction;
+import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.commands.SubCommand;
@@ -35,7 +36,7 @@ public final class CmdCreateFaction extends SubCommand {
     public void execute(CommandSender sender, String[] args) {
 
         if (fme.hasFaction()) {
-            sendMessage(Message.commandCreatedAlreadyInFaction);
+            sendMessage(Message.commandCreateAlreadyInFaction);
             return;
         }
 
@@ -44,8 +45,15 @@ public final class CmdCreateFaction extends SubCommand {
             return;
         }
 
+        fme.sendMessage(args[0].length() + "");
+
+        if (args[0].length() < Config.factionNameMinLength || args[0].length() > Config.factionNameMaxLength) {
+            sendMessage(Message.commandCreateNameLength, Config.factionNameMinLength, Config.factionNameMaxLength);
+            return;
+        }
+
         if (plugin.getFactionHandler().getFactionMap().containsKey(args[0])) {
-            sendMessage(Message.commandCreatedFactionAlreadyExists, args[0]);
+            sendMessage(Message.commandCreateFactionAlreadyExists, args[0]);
             return;
         }
 
@@ -61,7 +69,7 @@ public final class CmdCreateFaction extends SubCommand {
         final FactionPermission factionPermission = new FactionPermission();
         factionPermission.setDefaultPermissions();
         faction.setPermission(factionPermission);
-        sendMessage(Message.commandCreatedFaction, faction.getName());
+        sendMessage(Message.commandCreateFaction, faction.getName());
     }
 }
 

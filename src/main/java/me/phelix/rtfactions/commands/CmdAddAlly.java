@@ -83,9 +83,7 @@ public final class CmdAddAlly extends SubCommand {
                     faction.broadCast(color(String.format(Message.commandAllySuccess, myFaction.getName())));
                     faction.removeAllyRequest(myFaction);
                 }
-
             }
-
         } else {
             sendMessage(toString());
         }

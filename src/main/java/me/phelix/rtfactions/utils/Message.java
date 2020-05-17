@@ -40,9 +40,10 @@ public final class Message {
     public static String commandPlayerFactionNeeded = "&7You need to be in a faction to do that!";
     public static String commandPlayerSelfAlreadyInFaction = "&7You are already in a faction!";
 
-    public static String commandCreatedFaction = "&7Successfully created &6%s";
-    public static String commandCreatedAlreadyInFaction = "&7You are already in a faction!";
-    public static String commandCreatedFactionAlreadyExists = "&6%s &7already exists!";
+    public static String commandCreateFaction = "&7Successfully created &6%s";
+    public static String commandCreateAlreadyInFaction = "&7You are already in a faction!";
+    public static String commandCreateFactionAlreadyExists = "&6%s &7already exists!";
+    public static String commandCreateNameLength = "&7The name must be at least &6%s &7characters long and can have a maximum of &6%s &7characters!";
 
     public static String commandInvitePlayerNotExist = "&6%s &7does not exist or is not online!";
     public static String commandInvitePlayerAlreadyInSameFaction = "&6%s &7is already in the faction!";
@@ -83,6 +84,10 @@ public final class Message {
     public static String commandClaimSuccessfully = "&7Claimed the chunk &6%s&7;&6%s&7";
     public static String commandClaimSelf = "&7This chunk is already claimed by your faction!";
     public static String commandClaimEnemy = "&7This chunk is already claimed by &6%s&7!";
+
+    public static String commandUnclaimWilderness = "&7You can't unclaim wilderness!";
+    public static String commandUnclaimEnemy = "You can't unclaim &6%s's &7chunk!";
+    public static String commandUnclaimSuccessful = "&7Unclaimed the chunk &6%s&7;&6%s";
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");

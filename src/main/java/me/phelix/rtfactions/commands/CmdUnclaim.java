@@ -17,44 +17,41 @@
 
 package me.phelix.rtfactions.commands;
 
-import me.phelix.rtfactions.utils.Config;
+import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.Chunk;
 import org.bukkit.command.CommandSender;
 
-public final class CmdClaim extends SubCommand {
+public final class CmdUnclaim extends SubCommand {
 
-    public CmdClaim(){
-        super(new String[]{"claim", "c"}, new String[]{"[x] [z]"}, "Claim a chunk for the faction", Permission.CLAIMING, true);
+    public CmdUnclaim(){
+        super(new String[]{"unclaim"}, new String[]{""}, "Unclaim a chunk from your faction", Permission.UNCLAIMING, true);
     }
 
     @Override
     public void execute(CommandSender sender, String[] args){
-
-        if(myFaction.getPowerLeft() - Config.factionClaimPower < 0) {
-            sendMessage(Message.commandClaimNotEnoughPower);
-            return;
-        }
-
         if(args.length == 0) {
-            final Chunk chunk = fme.getPlayer().getLocation().getChunk();
 
-            if(!chunkHandler.isClaimed(chunk)) {
-                chunkHandler.claimChunk(chunk, myFaction);
-                sendMessage(Message.commandClaimSuccessfully, chunk.getX(), chunk.getZ());
-            } else if(chunkHandler.getFactionFromChunk(chunk).equals(myFaction)) {
-                sendMessage(Message.commandClaimSelf);
-            } else {
-                sendMessage(Message.commandClaimEnemy, chunkHandler.getFactionFromChunk(chunk).getName());
+            final Chunk chunk = fme.getPlayer().getLocation().getChunk();
+            final Faction faction = chunkHandler.getFactionFromChunk(chunk);
+            if(faction.equals(factionHandler.getWilderness())) {
+                sendMessage(Message.commandUnclaimWilderness);
+                return;
             }
-        } else if(args.length == 2) {
+
+            if(!faction.equals(myFaction)) {
+                sendMessage(Message.commandUnclaimEnemy, faction.getName());
+                return;
+            }
+
+            chunkHandler.unclaimChunk(chunk);
+            sendMessage(Message.commandUnclaimSuccessful, chunk.getX(), chunk.getZ());
 
         } else {
             sendMessage(toString());
         }
-
     }
 
 }
