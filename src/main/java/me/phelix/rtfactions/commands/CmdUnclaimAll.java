@@ -37,8 +37,8 @@ public final class CmdUnclaimAll extends SubCommand {
                 return;
             }
 
-            myFaction.getClaims().forEach(fLocation -> chunkHandler.getChunkMap().remove(fLocation));
-            myFaction.getClaims().clear();
+            chunkHandler.removeAllChunks(myFaction);
+
             sendMessage(Message.commandUnclaimAllSuccessful);
 
         } else {

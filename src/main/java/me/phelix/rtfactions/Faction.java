@@ -70,7 +70,7 @@ public final class Faction {
 
     public Set<Faction> getAllies(FactionHandler factionHandler){
         final Set<Faction> factions = new HashSet<>();
-        for(String string : getAllyNames()) {
+        for(final String string : getAllyNames()) {
             factions.add(factionHandler.getByName(string));
         }
         return factions;
