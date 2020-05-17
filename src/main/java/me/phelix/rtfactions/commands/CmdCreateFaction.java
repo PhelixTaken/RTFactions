@@ -45,8 +45,6 @@ public final class CmdCreateFaction extends SubCommand {
             return;
         }
 
-        fme.sendMessage(args[0].length() + "");
-
         if (args[0].length() < Config.factionNameMinLength || args[0].length() > Config.factionNameMaxLength) {
             sendMessage(Message.commandCreateNameLength, Config.factionNameMinLength, Config.factionNameMaxLength);
             return;
