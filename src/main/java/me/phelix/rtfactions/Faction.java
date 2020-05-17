@@ -102,6 +102,8 @@ public final class Faction {
     }
 
     public void addClaim(FLocation fLocation) {
+        if(claimedChunks == null)
+            claimedChunks = new HashSet<>();
         claimedChunks.add(fLocation);
     }
 

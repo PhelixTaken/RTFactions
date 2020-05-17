@@ -56,14 +56,11 @@ public final class RTFactions extends JavaPlugin implements Listener {
         registerEvents();
 
         load();
-
-
-
     }
 
     public void onDisable() {
+        System.out.println("Saving RTFactions...");
         save();
-        System.out.println("Saving RTFactions");
     }
 
     private void registerEvents(){
@@ -128,11 +125,11 @@ public final class RTFactions extends JavaPlugin implements Listener {
         }
 
         if (worldFile.exists()) {
-            final Type worldType = new TypeToken<HashMap<FLocation, Faction>>() {
+            final Type worldType = new TypeToken<HashMap<FLocation, String>>() {
             }.getType();
             chunkHandler.getChunkMap().putAll(persist.load(worldType, worldFile));
             for (final FLocation fLocation : chunkHandler.getChunkMap().keySet()) {
-                final Faction faction = chunkHandler.getChunkMap().get(fLocation);
+                final Faction faction = factionHandler.getByName(chunkHandler.getChunkMap().get(fLocation));
                 faction.addClaim(fLocation);
             }
         }

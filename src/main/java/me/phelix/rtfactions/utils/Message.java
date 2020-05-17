@@ -70,7 +70,7 @@ public final class Message {
     public static String commandJoinFactionClosed = "&6%s &7is closed!";
 
     public static String commandSetWarpExists = "&6%s &7already exists as a warp!";
-    public static String commandSetWarpTerritory = "&7You can't create a warp in &6territory&7!";
+    public static String commandSetWarpTerritory = "&7You can't create a warp in &6enemy territory&7!";
     public static String commandSetWarpWithPassword = "&7Created the warp &6%s &7with password as &6%s";
     public static String commandSetWarpWithoutPassword = "&7Created the warp &6%s";
 
@@ -79,6 +79,10 @@ public final class Message {
     public static String commandWarpSuccessful = "&7Successfully warped to &6%s&7!";
     public static String commandWarpWrongPassword = "&6%s &7doesn't match the password!";
 
+    public static String commandClaimNotEnoughPower = "&7You don't have enough power to claim!";
+    public static String commandClaimSuccessfully = "&7Claimed the chunk &6%s&7;&6%s&7";
+    public static String commandClaimSelf = "&7This chunk is already claimed by your faction!";
+    public static String commandClaimEnemy = "&7This chunk is already claimed by &6%s&7!";
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");

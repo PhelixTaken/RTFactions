@@ -26,6 +26,7 @@ public final class Config {
     private transient Config instance = this;
 
     public static int factionPowerPerPlayer = 10;
+    public static int claimPower = 1;
 
 
     public final void save(Persist persist, File file){

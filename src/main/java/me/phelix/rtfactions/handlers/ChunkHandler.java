@@ -29,7 +29,7 @@ import java.util.Map;
 
 public final class ChunkHandler {
 
-    private final Map<FLocation, Faction> chunkMap = new HashMap<>();
+    private final Map<FLocation, String> chunkMap = new HashMap<>();
 
     private final RTFactions main;
 
@@ -37,7 +37,7 @@ public final class ChunkHandler {
         this.main = main;
     }
 
-    public Map<FLocation, Faction> getChunkMap() {
+    public Map<FLocation, String> getChunkMap() {
         return chunkMap;
     }
 
@@ -56,22 +56,22 @@ public final class ChunkHandler {
     public void claimChunk(Chunk chunk, Faction faction) {
         final FLocation fLocation = new FLocation(chunk);
         faction.addClaim(fLocation);
-        chunkMap.put(fLocation, faction);
+        chunkMap.put(fLocation, faction.getName());
     }
 
     public void claimChunk(Location location, Faction faction) {
         final FLocation fLocation = new FLocation(location);
         faction.addClaim(fLocation);
-        chunkMap.put(fLocation, faction);
+        chunkMap.put(fLocation, faction.getName());
     }
 
     public void claimChunk(FLocation fLocation, Faction faction) {
         faction.addClaim(fLocation);
-        chunkMap.put(fLocation, faction);
+        chunkMap.put(fLocation, faction.getName());
     }
 
     public void removeChunk(FLocation fLocation) {
-        chunkMap.get(fLocation).getClaims().remove(fLocation);
+        main.getFactionHandler().getByName(chunkMap.get(fLocation)).getClaims().remove(fLocation);
         chunkMap.remove(fLocation);
     }
 
@@ -83,15 +83,24 @@ public final class ChunkHandler {
     }
 
     public Faction getFactionFromChunk(Chunk chunk) {
-        return chunkMap.getOrDefault(new FLocation(chunk), main.getFactionHandler().getWilderness());
+        if(chunkMap.get(new FLocation(chunk)) == null) {
+            return main.getFactionHandler().getWilderness();
+        }
+        return main.getFactionHandler().getByName(chunkMap.get(new FLocation(chunk)));
     }
 
     public Faction getFactionFromChunk(Location location) {
-        return chunkMap.getOrDefault(new FLocation(location), main.getFactionHandler().getWilderness());
+        if(chunkMap.get(new FLocation(location)) == null) {
+            return main.getFactionHandler().getWilderness();
+        }
+        return main.getFactionHandler().getByName(chunkMap.get(new FLocation(location)));
     }
 
     public Faction getFactionFromChunk(FLocation fLocation) {
-        return chunkMap.getOrDefault(fLocation, main.getFactionHandler().getWilderness());
+        if(chunkMap.get(fLocation) == null) {
+            return main.getFactionHandler().getWilderness();
+        }
+        return main.getFactionHandler().getByName(chunkMap.get(fLocation));
     }
 
     public Collection<FLocation> getClaimedChunks(Faction faction) {
