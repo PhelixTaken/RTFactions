@@ -17,7 +17,6 @@
 
 package me.phelix.rtfactions.commands;
 
-import me.phelix.rtfactions.FLocation;
 import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;

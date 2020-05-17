@@ -34,6 +34,11 @@ public final class CmdCreateFaction extends SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
 
+        if (fme.hasFaction()) {
+            sendMessage(Message.commandCreatedAlreadyInFaction);
+            return;
+        }
+
         if (args.length != 1) {
             sendMessage(toString());
             return;
@@ -41,11 +46,6 @@ public final class CmdCreateFaction extends SubCommand {
 
         if (plugin.getFactionHandler().getFactionMap().containsKey(args[0])) {
             sendMessage(Message.commandCreatedFactionAlreadyExists, args[0]);
-            return;
-        }
-
-        if (fme.hasFaction()) {
-            sendMessage(Message.commandCreatedAlreadyInFaction);
             return;
         }
 
