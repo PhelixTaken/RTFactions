@@ -17,16 +17,16 @@
 
 package me.phelix.rtfactions.commands;
 
-import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Message;
+import me.phelix.rtfactions.utils.Warp;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
 
-public final class CmdSetWarp extends SubCommand {
+public final class CmdWarp extends SubCommand {
 
-    public CmdSetWarp(){
-        super(new String[]{"setwarp", "setw", "sw"}, new String[]{"<name> [password]"}, "Set a warp for the faction", Permission.SET_WARP, true);
+    public CmdWarp() {
+        super(new String[]{"warp", "w"}, new String[]{"<name> [password]"}, "Warp to a specific faction warp", Permission.WARP, true);
     }
 
     @Override
@@ -38,27 +38,28 @@ public final class CmdSetWarp extends SubCommand {
             if (args.length == 2)
                 password = args[1];
 
-            if (myFaction.warpExists(name)) {
-                sendMessage(Message.commandSetWarpExists, name);
+            if (!myFaction.warpExists(name)) {
+                sendMessage(Message.commandWarpNotExist, name);
                 return;
             }
 
-            final Faction chunk = chunkHandler.getFactionFromChunk(fme.getPlayer().getLocation());
-            if (!chunk.equals(myFaction) && !chunk.equals(factionHandler.getWilderness())) {
-                sendMessage(Message.commandSetWarpTerritory);
+            final Warp warp = myFaction.getWarp(name);
+
+            if(warp.hasPassword() && password == null){
+                sendMessage(Message.commandWarpRequiresPassword, name);
                 return;
             }
 
-            if (password != null) {
-                sendMessage(Message.commandSetWarpWithPassword, name, password);
-                myFaction.addWarp(name, password, fme.getPlayer().getLocation());
+            if(!warp.hasPassword()) {
+                fme.getPlayer().teleport(warp.getLocation());
+                sendMessage(Message.commandWarpSuccessful, warp.getName());
+            } else if(password.equals(warp.getPassword())) {
+                fme.getPlayer().teleport(warp.getLocation());
+                sendMessage(Message.commandWarpSuccessful, warp.getName());
             } else {
-                sendMessage(Message.commandSetWarpWithoutPassword, name);
-                myFaction.addWarp(name, null, fme.getPlayer().getLocation());
+                sendMessage(Message.commandWarpWrongPassword, password);
             }
 
-        } else {
-            sendMessage(toString());
         }
     }
 

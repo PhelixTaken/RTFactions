@@ -74,6 +74,11 @@ public final class Message {
     public static String commandSetWarpWithPassword = "&7Created the warp &6%s &7with password as &6%s";
     public static String commandSetWarpWithoutPassword = "&7Created the warp &6%s";
 
+    public static String commandWarpNotExist = "&7The warp &6%s &7does not exist!";
+    public static String commandWarpRequiresPassword = "&7The warp &6%s &7requires a password!";
+    public static String commandWarpSuccessful = "&7Successfully warped to &6%s&7!";
+    public static String commandWarpWrongPassword = "&6%s &7doesn't match the password!";
+
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");

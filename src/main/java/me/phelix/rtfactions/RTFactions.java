@@ -27,13 +27,19 @@ import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import net.prosavage.baseplugin.serializer.Persist;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-public final class RTFactions extends JavaPlugin {
+public final class RTFactions extends JavaPlugin implements Listener {
 
     private FactionHandler factionHandler;
     private PlayerHandler playerHandler;
@@ -48,7 +54,11 @@ public final class RTFactions extends JavaPlugin {
         saveDefaultConfig();
 
         registerEvents();
+
         load();
+
+
+
     }
 
     public void onDisable() {
@@ -58,6 +68,7 @@ public final class RTFactions extends JavaPlugin {
 
     private void registerEvents(){
         Bukkit.getPluginManager().registerEvents(new JoinEvent(this), this);
+        Bukkit.getPluginManager().registerEvents(this, this);
     }
 
     public FactionHandler getFactionHandler() {
@@ -70,6 +81,11 @@ public final class RTFactions extends JavaPlugin {
 
     public ChunkHandler getChunkHandler() {
         return chunkHandler;
+    }
+
+    @EventHandler
+    public void onWeather(WeatherChangeEvent event){
+        event.setCancelled(true);
     }
 
     private void load() {
@@ -120,6 +136,15 @@ public final class RTFactions extends JavaPlugin {
                 faction.addClaim(fLocation);
             }
         }
+
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                for(final World world : Bukkit.getWorlds()){
+                    world.setTime(1500L);
+                }
+            }
+        }, 0, 1200L);
 
 
     }
