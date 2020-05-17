@@ -89,6 +89,9 @@ public final class Message {
     public static String commandUnclaimEnemy = "You can't unclaim &6%s's &7chunk!";
     public static String commandUnclaimSuccessful = "&7Unclaimed the chunk &6%s&7;&6%s";
 
+    public static String commandUnclaimAllNone = "&7Your faction doesn't have any claimed chunks to unclaim!";
+    public static String commandUnclaimAllSuccessful = "&7Unclaimed all the chunks from your faction!";
+
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");
         add("&7Tag \u00BB &6{faction_name}");
