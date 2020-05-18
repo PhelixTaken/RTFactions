@@ -61,18 +61,20 @@ public final class CmdChat extends SubCommand implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
         final FPlayer fme = plugin.getPlayerHandler().getByPlayer(event.getPlayer());
-        final Faction myFaction = fme.getFaction();
-        switch (fme.getChat()) {
-            case 1:
-                event.setCancelled(true);
-                myFaction.broadCast(ChatColor.translateAlternateColorCodes('&', String.format(Message.commandChatFactionPrefix, fme.getName() + fme.getPrefixCharacters(), event.getMessage())));
-                break;
-            case 2:
-                event.setCancelled(true);
-                final String allyMessage = ChatColor.translateAlternateColorCodes('&', String.format(Message.commandChatAllyPrefix, fme.getName() + fme.getPrefixCharacters(), event.getMessage()));
-                myFaction.getAllies(plugin.getFactionHandler()).forEach(ally -> ally.broadCast(allyMessage));
-                myFaction.broadCast(allyMessage);
-                break;
+        if (fme.hasFaction()) {
+            final Faction myFaction = fme.getFaction();
+            switch (fme.getChat()) {
+                case 1:
+                    event.setCancelled(true);
+                    myFaction.broadCast(ChatColor.translateAlternateColorCodes('&', String.format(Message.commandChatFactionPrefix, fme.getName() + fme.getPrefixCharacters(), event.getMessage())));
+                    break;
+                case 2:
+                    event.setCancelled(true);
+                    final String allyMessage = ChatColor.translateAlternateColorCodes('&', String.format(Message.commandChatAllyPrefix, fme.getName() + fme.getPrefixCharacters(), event.getMessage()));
+                    myFaction.getAllies(plugin.getFactionHandler()).forEach(ally -> ally.broadCast(allyMessage));
+                    myFaction.broadCast(allyMessage);
+                    break;
+            }
         }
     }
 
