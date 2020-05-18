@@ -20,27 +20,30 @@ package me.phelix.rtfactions.commands;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
-public final class CmdDescription extends SubCommand {
+public final class CmdSetHome extends SubCommand {
 
-    public CmdDescription(){
-        super(new String[]{"description", "desc"}, new String[]{"<description>"}, "Set the description of the faction", Permission.SET_DESCRIPTION, true);
+    public CmdSetHome() {
+        super(new String[]{"sethome", "seth", "sh"}, new String[]{""}, "Set a home in your faction", Permission.SET_HOME, true);
     }
 
     @Override
-    public void execute(CommandSender sender, String[] args){
-        if(args.length > 0){
-            final StringBuilder builder = new StringBuilder();
-            for (final String arg : args) {
-                builder.append(arg).append(" ");
+    public void execute(CommandSender sender, String[] args) {
+        final Location location = fme.getPlayer().getLocation();
+        int test = 0;
+        if (args.length == 0) {
+            if (chunkHandler.getFactionFromChunk(location).equals(myFaction)) {
+                myFaction.setHome(location);
+                sendMessage(Message.commandSetHomeSuccessful, location.getX(), location.getY(), location.getZ());
+            } else {
+                sendMessage(Message.commandSetHomeEnemy);
             }
-            myFaction.setDescription(builder.toString());
-            sendMessage(Message.commandDescriptionSet, builder.toString());
-
         } else {
             sendMessage(toString());
         }
+
     }
 
 }

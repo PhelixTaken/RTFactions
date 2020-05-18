@@ -22,22 +22,21 @@ import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
 
-public final class CmdDescription extends SubCommand {
+public final class CmdHome extends SubCommand {
 
-    public CmdDescription(){
-        super(new String[]{"description", "desc"}, new String[]{"<description>"}, "Set the description of the faction", Permission.SET_DESCRIPTION, true);
+    public CmdHome(){
+        super(new String[]{"home", "h"}, new String[]{""}, "Warp to your faction home", Permission.HOME, true);
     }
 
     @Override
     public void execute(CommandSender sender, String[] args){
-        if(args.length > 0){
-            final StringBuilder builder = new StringBuilder();
-            for (final String arg : args) {
-                builder.append(arg).append(" ");
+        if(args.length == 0) {
+            if(myFaction.hasHome()) {
+                fme.getPlayer().teleport(myFaction.getHome().getLocation());
+                sendMessage(Message.commandHomeSuccessful);
+            } else {
+                sendMessage(Message.commandHomeNotExist);
             }
-            myFaction.setDescription(builder.toString());
-            sendMessage(Message.commandDescriptionSet, builder.toString());
-
         } else {
             sendMessage(toString());
         }

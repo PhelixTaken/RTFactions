@@ -43,6 +43,7 @@ public final class Faction {
     private final transient Set<FPlayer> invitations = new HashSet<>();
     private final transient Set<Faction> allyRequests = new HashSet<>();
     private final Map<String, Warp> warps = new HashMap<>();
+    private Warp home;
     private String description;
     private FactionPermission factionPermission;
     private int power;
@@ -232,8 +233,22 @@ public final class Faction {
         warps.remove(name);
     }
 
-    public boolean warpExists(String name){
+    public boolean warpExists(String name) {
         return warps.containsKey(name);
+    }
+
+    @Nullable
+    public Warp getHome() {
+        return home;
+    }
+
+    public void setHome(Location location) {
+        if (home == null)
+            home = new Warp("home", null, location.getWorld().getUID().toString(), location.getX(), location.getY(), location.getZ());
+    }
+
+    public boolean hasHome() {
+        return home != null;
     }
 
 }

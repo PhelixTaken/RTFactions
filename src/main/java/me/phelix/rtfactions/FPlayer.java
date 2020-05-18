@@ -30,6 +30,7 @@ public final class FPlayer {
     private final String id;
     private transient Faction faction;
     private Role role;
+    private byte chat = 0;
 
     public FPlayer(String id) {
         this.id = id;
@@ -76,11 +77,33 @@ public final class FPlayer {
     }
 
     @Nullable
-    public Player getPlayer(){
+    public Player getPlayer() {
         return Bukkit.getPlayer(UUID.fromString(id));
     }
 
-    public String getName(){
-       return Bukkit.getOfflinePlayer(UUID.fromString(id)).getName();
+    @Nullable
+    public String getName() {
+        return Bukkit.getOfflinePlayer(UUID.fromString(id)).getName();
+    }
+
+    public byte getChat() {
+        return chat;
+    }
+
+    public byte getChat(char c) {
+        switch (c) {
+            case 'p':
+                chat = 0;
+                return chat;
+            case 'f':
+                chat = 1;
+                return chat;
+            case 'a':
+                chat = 2;
+                return chat;
+            default:
+                chat = 0;
+                return chat;
+        }
     }
 }

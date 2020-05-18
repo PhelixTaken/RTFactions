@@ -94,9 +94,16 @@ public final class Message {
 
     public static String commandDeleteWarpSuccess = "&7Deleted the warp &6%s&7!";
 
-    public static String commandDisbandWarning = "&7Click here to disband your faction. &6&o(( This cannot be undone! ))";
+    public static String commandDisbandWarning = "&7Click here to disband your faction. &o&6(( This cannot be undone! ))";
     public static String commandDisbandBroadcast = "&7The faction is disbanded by &6%s&7!";
     public static String commandDisbandSuccess = "&7You have disbanded the faction &6%s&7!";
+
+    public static String commandSetHomeSuccessful = "&7Set a home at &6%s&7;&6%s&7;&6%s";
+    public static String commandSetHomeEnemy = "&7You can only set a home in your &6claimed &7chunks!";
+
+    public static String commandHomeSuccessful = "&7Teleported to home";
+    public static String commandHomeNotExist = "&7Your faction does not have a home set!";
+
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");
