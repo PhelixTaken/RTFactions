@@ -33,6 +33,7 @@ public final class Message {
     public static String commandPermissionNeeded = "&7Your faction does not allow you to do this, it requires the action &6%s&7!";
 
     public static String commandInfoFactionNotExist = "&6%s &7does not exists!";
+    public static String commandInfoPlayerNotExist = "&6%s &7does not exist!";
 
     public static String commandHelp = "&6f %s &8> &7";
 
@@ -112,6 +113,11 @@ public final class Message {
     public static String commandRemoveAllyNoAlly = "&7Your faction is not allied with &6%s&7!";
     public static String commandRemoveAllyBroadcast = "&6%s &7is not an ally anymore!";
     public static String commandRemoveAllySuccessful = "&7You have successfully de-allied &6%s&7!";
+
+    public static String commandPromoteNotSameFaction = "&7You can't promote people that aren't in your faction!";
+    public static String commandPromoteNotHigher = "&7You can't promote someone to a higher role than yours!";
+    public static String commandPromoteSuccessful = "&7You have promoted &6%s &7to &6%s&7!";
+    public static String commandPromotePlayer = "&7You are promoted to &6%s &7by &6%s&7!";
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");

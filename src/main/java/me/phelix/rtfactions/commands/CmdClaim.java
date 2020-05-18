@@ -27,7 +27,7 @@ import org.bukkit.command.CommandSender;
 public final class CmdClaim extends SubCommand {
 
     public CmdClaim(){
-        super(new String[]{"claim", "c"}, new String[]{"[x] [z]"}, "Claim a chunk for the faction", Permission.CLAIMING, true);
+        super(new String[]{"claim"}, new String[]{"[x] [z]"}, "Claim a chunk for the faction", Permission.CLAIMING, true);
     }
 
     @Override
