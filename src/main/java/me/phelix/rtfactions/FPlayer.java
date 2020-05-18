@@ -17,6 +17,7 @@
 
 package me.phelix.rtfactions;
 
+import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Role;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -105,5 +106,19 @@ public final class FPlayer {
                 chat = 0;
                 return chat;
         }
+    }
+
+    public String getPrefixCharacters(){
+        if(hasFaction()) {
+            switch(role) {
+                case MODERATOR:
+                    return Config.factionModeratorPrefix;
+                case COLEADER:
+                    return Config.factionCoLeaderPrefix;
+                case LEADER:
+                    return Config.factionLeaderPrefix;
+            }
+        }
+        return "";
     }
 }

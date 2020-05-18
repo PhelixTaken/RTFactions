@@ -31,6 +31,9 @@ public final class Config {
     public static int factionNameMinLength = 4;
     public static int factionNameMaxLength = 16;
 
+    public static String factionModeratorPrefix = "*";
+    public static String factionCoLeaderPrefix = "**";
+    public static String factionLeaderPrefix = "***";
 
     public final void save(Persist persist, File file){
         persist.save(false, instance, file);

@@ -104,6 +104,11 @@ public final class Message {
     public static String commandHomeSuccessful = "&7Teleported to home";
     public static String commandHomeNotExist = "&7Your faction does not have a home set!";
 
+    public static String commandChatChange = "&7Xhanged your chat to &6%s &7chat!";
+
+    public static String commandChatFactionPrefix = "&f%s >> &a%s";
+    public static String commandChatAllyPrefix = "&f%s >> &d%s";
+
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");

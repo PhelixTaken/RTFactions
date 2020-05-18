@@ -53,6 +53,7 @@ public final class CommandHandler implements CommandExecutor {
         commands.add(new CmdDisband());
         commands.add(new CmdSetHome());
         commands.add(new CmdHome());
+        commands.add(new CmdChat(plugin));
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
