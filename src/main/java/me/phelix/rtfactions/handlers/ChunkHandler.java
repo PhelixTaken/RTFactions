@@ -23,9 +23,7 @@ import me.phelix.rtfactions.RTFactions;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public final class ChunkHandler {
 
@@ -113,6 +111,15 @@ public final class ChunkHandler {
             return main.getFactionHandler().getWilderness();
         }
         return main.getFactionHandler().getByName(chunkMap.get(fLocation));
+    }
+
+    public void unclaimAmountChunks(Faction faction, int amount) {
+        if (!getClaimedChunks(faction).isEmpty()) {
+            final List<FLocation> chunkSet = new ArrayList<>(getClaimedChunks(faction));
+            for(int i = 0; i < amount - 1; i++){
+                unclaimChunk(chunkSet.get(chunkSet.size() - 1));
+            }
+        }
     }
 
     public Collection<FLocation> getClaimedChunks(Faction faction) {

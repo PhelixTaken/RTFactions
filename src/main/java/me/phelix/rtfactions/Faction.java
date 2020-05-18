@@ -18,6 +18,7 @@
 package me.phelix.rtfactions;
 
 import me.phelix.rtfactions.handlers.FactionHandler;
+import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.Warp;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
@@ -137,7 +138,7 @@ public final class Faction {
     }
 
     public final int getPowerLeft() {
-        return power - claimedChunks.size();
+        return power - (claimedChunks.size() * Config.factionClaimPower);
     }
 
     @NotNull

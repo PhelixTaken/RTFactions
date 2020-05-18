@@ -57,6 +57,7 @@ public final class CommandHandler implements CommandExecutor {
         commands.add(new CmdRemoveAlly());
         commands.add(new CmdPromote());
         commands.add(new CmdDemote());
+        commands.add(new CmdKick());
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

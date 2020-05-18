@@ -41,7 +41,7 @@ public final class CmdDemote extends SubCommand {
             }
 
             if(!fPlayer.getFaction().equals(myFaction)) {
-                sendMessage(Message.commandPromoteNotSameFaction);
+                sendMessage(Message.commandDemoteNotSameFaction);
                 return;
             }
 

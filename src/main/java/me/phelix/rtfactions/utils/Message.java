@@ -119,10 +119,18 @@ public final class Message {
     public static String commandPromoteSuccessful = "&7You have promoted &6%s &7to &6%s&7!";
     public static String commandPromotePlayer = "&7You are promoted to &6%s &7by &6%s&7!";
 
+    public static String commandDemoteNotSameFaction = "&7You can't demote people that aren't in your faction!";
     public static String commandDemoteHigherRole = "&7You cannot demote someone that has the same or higher role than you!";
     public static String commandDemoteUnderRecruit = "&7You cannot demote someone that has the &6recruit &7role!";
     public static String commandDemoteSuccessful = "&7You have demoted &6%s &7to &6%s&7!";
     public static String commandDemotePlayer = "&7You are demoted to &6%s &7by &6%s&7!";
+
+    public static String commandKickNotSameFaction = "&7You can't kick people that aren't in your faction!";
+    public static String commandKickHigherRole = "&7You can't kick someone that has the same or higher role than you!";
+    public static String commandKickSuccessful = "&7You have kicked &6%s &7from the faction!";
+    public static String commandKickPlayer = "&7You have been kicked from &6%s &7by &6%s&7!";
+    public static String commandKickBroadcast = "&6%s &7has been kicked from the faction by &6%s&7!";
+
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");
