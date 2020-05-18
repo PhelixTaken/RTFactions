@@ -19,6 +19,7 @@ package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.FPlayer;
 import me.phelix.rtfactions.utils.Message;
+import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.command.CommandSender;
@@ -39,8 +40,22 @@ public final class CmdDemote extends SubCommand {
                 return;
             }
 
-            
+            if(!fPlayer.getFaction().equals(myFaction)) {
+                sendMessage(Message.commandPromoteNotSameFaction);
+                return;
+            }
 
+            if(fme.getRole().getValue() >= fPlayer.getRole().getValue()) {
+                sendMessage(Message.commandDemoteHigherRole);
+                return;
+            } else if (fPlayer.getRole().getValue() - 1 == Role.NONE.getValue()) {
+                sendMessage(Message.commandDemoteUnderRecruit);
+            } else {
+                final Role role = fPlayer.getRole().getByValue(fPlayer.getRole().getValue() - 1);
+                fPlayer.setRole(role);
+                sendMessage(Message.commandDemoteSuccessful, fPlayer.getName(), role.getPrefix());
+                sendMessage(fPlayer, Message.commandDemotePlayer, role.getPrefix(), fme.getName());
+            }
         } else {
             sendMessage(toString());
         }
