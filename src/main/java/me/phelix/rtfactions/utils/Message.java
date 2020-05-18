@@ -109,6 +109,9 @@ public final class Message {
     public static String commandChatFactionPrefix = "&f%s >> &a%s";
     public static String commandChatAllyPrefix = "&f%s >> &d%s";
 
+    public static String commandRemoveAllyNoAlly = "&7Your faction is not allied with &6%s&7!";
+    public static String commandRemoveAllyBroadcast = "&6%s &7is not an ally anymore!";
+    public static String commandRemoveAllySuccessful = "&7You have successfully de-allied &6%s&7!";
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");

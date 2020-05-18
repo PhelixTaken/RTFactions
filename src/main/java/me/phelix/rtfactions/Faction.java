@@ -204,6 +204,10 @@ public final class Faction {
         allyRequests.remove(ally);
     }
 
+    public boolean isAlly(Faction faction) {
+        return allyNames.contains(faction.getName());
+    }
+
     @NotNull
     public Set<FPlayer> getPlayersByPermission(Permission permission) {
         final Set<FPlayer> fPlayers = new HashSet<>();
