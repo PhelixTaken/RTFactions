@@ -118,6 +118,7 @@ public final class RTFactions extends JavaPlugin implements Listener {
         for (final Faction faction : factionHandler.getFactionMap().values()) {
             for (final FPlayer fPlayer : faction.getPlayers()) {
                 fPlayer.setFaction(faction);
+
                 getPlayerHandler().getPlayerMap().put(fPlayer.getUUID(), fPlayer);
             }
         }

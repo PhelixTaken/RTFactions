@@ -17,6 +17,8 @@
 
 package me.phelix.rtfactions.commands;
 
+import me.phelix.rtfactions.FPlayer;
+import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.RTFactions;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
@@ -30,9 +32,11 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public final class CmdChat extends SubCommand implements Listener {
 
+    private final RTFactions plugin;
     public CmdChat(RTFactions plugin) {
         super(new String[]{"chat", "c"}, new String[]{"[p, c, a]"}, "Change chat", Permission.CHAT, true);
         Bukkit.getPluginManager().registerEvents(this, plugin);
+        this.plugin = plugin;
     }
 
     @Override
@@ -56,7 +60,8 @@ public final class CmdChat extends SubCommand implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
-
+        final FPlayer fme = plugin.getPlayerHandler().getByPlayer(event.getPlayer());
+        final Faction myFaction = fme.getFaction();
         switch (fme.getChat()) {
             case 1:
                 event.setCancelled(true);
@@ -65,7 +70,7 @@ public final class CmdChat extends SubCommand implements Listener {
             case 2:
                 event.setCancelled(true);
                 final String allyMessage = ChatColor.translateAlternateColorCodes('&', String.format(Message.commandChatAllyPrefix, fme.getName() + fme.getPrefixCharacters(), event.getMessage()));
-                myFaction.getAllies(factionHandler).forEach(ally -> ally.broadCast(allyMessage));
+                myFaction.getAllies(plugin.getFactionHandler()).forEach(ally -> ally.broadCast(allyMessage));
                 myFaction.broadCast(allyMessage);
                 break;
         }
