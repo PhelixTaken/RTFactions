@@ -17,13 +17,19 @@
 
 package me.phelix.rtfactions.commands;
 
+import me.phelix.rtfactions.FLocation;
 import me.phelix.rtfactions.FPlayer;
 import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class CmdKick extends SubCommand {
 
@@ -56,14 +62,18 @@ public final class CmdKick extends SubCommand {
 
             factionHandler.getWilderness().addPlayer(fPlayer);
             fPlayer.setRole(Role.NONE);
+            myFaction.removePower(Config.factionPowerPerPlayer);
 
             if(chunkHandler.getClaimedChunks(myFaction).size() > 0) {
-                // 10 5 chunks per player
-                int i = 0;
-                while(myFaction.getPowerLeft() > myFaction.getPlayers().size() * (Config.factionPowerPerPlayer / Config.factionClaimPower) ) {
-                    i++;
-                    chunkHandler.unclaimAmountChunks(myFaction, i);
+
+                while (myFaction.getClaims().size() * Config.factionClaimPower > myFaction.getTotalPower()) {
+                    final FLocation fLocation = chunkHandler.getClaimedChunks(myFaction).get(chunkHandler.getClaimedChunks(myFaction).size() - 1);
+                    System.out.println(myFaction.getClaims().size());
+                    myFaction.removeClaim(fLocation);
+                    chunkHandler.getChunkMap().remove(fLocation);
                 }
+
+                myFaction.setPower(myFaction.getTotalPower() - (Config.factionClaimPower * myFaction.getClaims().size()));
 
             }
 

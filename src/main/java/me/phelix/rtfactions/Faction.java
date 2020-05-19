@@ -41,7 +41,7 @@ public final class Faction {
     private final Set<FPlayer> players = new HashSet<>();
     private final Set<String> allyNames = new HashSet<>();
     private transient Set<FLocation> claimedChunks = new HashSet<>();
-    private final transient Set<FPlayer> invitations = new HashSet<>();
+    private transient Set<FPlayer> invitations = new HashSet<>();
     private final transient Set<Faction> allyRequests = new HashSet<>();
     private final Map<String, Warp> warps = new HashMap<>();
     private Warp home;
@@ -110,6 +110,8 @@ public final class Faction {
     }
 
     public void removeClaim(FLocation fLocation) {
+        if(claimedChunks == null)
+            claimedChunks = new HashSet<>();
         claimedChunks.remove(fLocation);
     }
 
@@ -129,16 +131,24 @@ public final class Faction {
         this.factionPermission = factionPermission;
     }
 
-    public final int getTotalPower() {
-        return power;
+    public int getTotalPower() {
+        return players.size() * Config.factionPowerPerPlayer;
     }
 
-    public final void setTotalPower(int amount) {
+    public void setPower(int amount) {
         power = amount;
     }
 
+    public void addPower(int amount) {
+        power += amount;
+    }
+
+    public void removePower(int amount){
+        power -= amount;
+    }
+
     public final int getPowerLeft() {
-        return power - (claimedChunks.size() * Config.factionClaimPower);
+        return power;
     }
 
     @NotNull
@@ -166,6 +176,8 @@ public final class Faction {
     }
 
     public void invite(FPlayer fPlayer){
+        if(invitations == null)
+            invitations = new HashSet<>();
         invitations.add(fPlayer);
     }
 

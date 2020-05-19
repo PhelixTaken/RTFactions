@@ -18,6 +18,7 @@
 package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.Faction;
+import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
@@ -73,7 +74,7 @@ public final class CmdWho extends SubCommand {
                             .replace("[", "").replace("]", ""))
                     .replace(",", "&7,&6")
                     .replace("{faction_claims}", faction.getClaims().size() + "")
-                    .replace("{faction_totalclaims}", faction.getTotalPower() + "")
+                    .replace("{faction_totalclaims}", faction.getTotalPower() / Config.factionClaimPower + "")
                     .replace("{faction_powerleft}", faction.getPowerLeft() + "")
                     .replace("{faction_totalpower}", faction.getTotalPower() + "")
                     .replace("{faction_allies}", allies.toString().replace("[", "").replace("]", ""))

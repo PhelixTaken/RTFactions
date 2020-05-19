@@ -60,7 +60,7 @@ public final class CmdCreateFaction extends SubCommand {
         plugin.getFactionHandler().getFactionMap().put(faction.getName(), faction);
         fme.setFaction(faction);
         fme.setRole(Role.LEADER);
-        faction.setTotalPower(10);
+        faction.setPower(Config.factionPowerPerPlayer);
         faction.setDefaultRole(Role.RECRUIT);
         faction.addPlayer(fme);
         faction.setDescription("Default description");

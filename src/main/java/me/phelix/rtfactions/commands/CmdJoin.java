@@ -61,7 +61,7 @@ public final class CmdJoin extends SubCommand {
         fPlayer.getFaction().removePlayer(fPlayer);
         fPlayer.setFaction(faction);
         fPlayer.setRole(faction.getDefaultRole());
-        faction.setTotalPower(faction.getTotalPower() + Config.factionPowerPerPlayer);
+        faction.addPower(Config.factionPowerPerPlayer);
         faction.addPlayer(fPlayer);
         faction.deinvite(fPlayer);
         sendMessage(Message.commandJoinFactionPlayer, faction.getName());

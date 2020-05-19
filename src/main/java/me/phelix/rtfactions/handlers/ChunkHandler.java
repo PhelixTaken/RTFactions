@@ -20,6 +20,7 @@ package me.phelix.rtfactions.handlers;
 import me.phelix.rtfactions.FLocation;
 import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.RTFactions;
+import me.phelix.rtfactions.utils.Config;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 
@@ -55,33 +56,43 @@ public final class ChunkHandler {
         final FLocation fLocation = new FLocation(chunk);
         faction.addClaim(fLocation);
         chunkMap.put(fLocation, faction.getName());
+        faction.removePower(Config.factionClaimPower);
     }
 
     public void claimChunk(Location location, Faction faction) {
         final FLocation fLocation = new FLocation(location);
         faction.addClaim(fLocation);
         chunkMap.put(fLocation, faction.getName());
+        faction.removePower(Config.factionClaimPower);
     }
 
     public void claimChunk(FLocation fLocation, Faction faction) {
         faction.addClaim(fLocation);
         chunkMap.put(fLocation, faction.getName());
+        faction.removePower(Config.factionClaimPower);
     }
 
     public void unclaimChunk(Chunk chunk) {
         final FLocation fLocation = new FLocation(chunk);
-        getFactionFromChunk(chunk).removeClaim(fLocation);
+        final Faction faction = getFactionFromChunk(chunk);
+        faction.removeClaim(fLocation);
+        faction.addPower(Config.factionClaimPower);
         chunkMap.remove(fLocation);
+
     }
 
     public void unclaimChunk(Location location) {
         final FLocation fLocation = new FLocation(location);
-        getFactionFromChunk(fLocation).removeClaim(fLocation);
+        final Faction faction = getFactionFromChunk(fLocation);
+        faction.removeClaim(fLocation);
+        faction.addPower(Config.factionClaimPower);
         chunkMap.remove(fLocation);
     }
 
     public void unclaimChunk(FLocation fLocation) {
-        getFactionFromChunk(fLocation).removeClaim(fLocation);
+        final Faction faction = getFactionFromChunk(fLocation);
+        faction.removeClaim(fLocation);
+        faction.addPower(Config.factionClaimPower);
         chunkMap.remove(fLocation);
     }
 
@@ -90,6 +101,7 @@ public final class ChunkHandler {
             chunkMap.remove(fLocation);
         }
         faction.getClaims().clear();
+        faction.setPower(faction.getTotalPower());
     }
 
     public Faction getFactionFromChunk(Chunk chunk) {
@@ -122,7 +134,7 @@ public final class ChunkHandler {
         }
     }
 
-    public Collection<FLocation> getClaimedChunks(Faction faction) {
-        return faction.getClaims();
+    public List<FLocation> getClaimedChunks(Faction faction) {
+        return new ArrayList<>(faction.getClaims());
     }
 }
