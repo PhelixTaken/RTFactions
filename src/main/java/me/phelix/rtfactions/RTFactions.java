@@ -118,7 +118,6 @@ public final class RTFactions extends JavaPlugin implements Listener {
         for (final Faction faction : factionHandler.getFactionMap().values()) {
             for (final FPlayer fPlayer : faction.getPlayers()) {
                 fPlayer.setFaction(faction);
-
                 getPlayerHandler().getPlayerMap().put(fPlayer.getUUID(), fPlayer);
             }
         }
@@ -131,14 +130,13 @@ public final class RTFactions extends JavaPlugin implements Listener {
                 final Faction faction = factionHandler.getByName(chunkHandler.getChunkMap().get(fLocation));
                 faction.addClaim(fLocation);
             }
-        }
 
-        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public void run() {
-                for(final World world : Bukkit.getWorlds()){
-                    world.setTime(1500L);
-                }
+        }
+        factionHandler.getFactionMap().values().forEach(faction -> faction.setPower(faction.getTotalPower() - (faction.getClaims().size() * Config.factionClaimPower)));
+
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            for(final World world : Bukkit.getWorlds()){
+                world.setTime(1500L);
             }
         }, 0, 1200L);
 

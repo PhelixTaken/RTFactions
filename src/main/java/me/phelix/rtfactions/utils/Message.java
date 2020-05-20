@@ -131,6 +131,10 @@ public final class Message {
     public static String commandKickPlayer = "&7You have been kicked from &6%s &7by &6%s&7!";
     public static String commandKickBroadcast = "&6%s &7has been kicked from the faction by &6%s&7!";
 
+    public static String commandBanSuccessful = "&7You have banned &6%s &7from the faction!";
+    public static String commandBanPlayer = "&7You have been banned from &6%s &7by &6%s&7!";
+    public static String commandBanHigherRole = "&7You can't ban someone that has the same or higher role than you!";
+    public static String commandBanBroadcast = "&6%s &7has been ban from the faction by &6%s&7!";
 
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");

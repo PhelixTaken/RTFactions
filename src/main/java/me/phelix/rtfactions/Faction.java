@@ -43,6 +43,7 @@ public final class Faction {
     private transient Set<FLocation> claimedChunks = new HashSet<>();
     private transient Set<FPlayer> invitations = new HashSet<>();
     private final transient Set<Faction> allyRequests = new HashSet<>();
+    private final Set<String> bans = new HashSet<>();
     private final Map<String, Warp> warps = new HashMap<>();
     private Warp home;
     private String description;
@@ -266,6 +267,23 @@ public final class Faction {
 
     public boolean hasHome() {
         return home != null;
+    }
+
+    @NotNull
+    public Set<String> getBannedPlayers() {
+        return bans;
+    }
+
+    public void banPlayer(FPlayer fPlayer) {
+        bans.add(fPlayer.getId());
+    }
+
+    public void unbanPlayer(FPlayer fPlayer){
+        bans.remove(fPlayer.getId());
+    }
+
+    public boolean isBanned(FPlayer fPlayer){
+        return bans.contains(fPlayer.getId());
     }
 
 }

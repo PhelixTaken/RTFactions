@@ -41,6 +41,8 @@ public enum Permission {
     CHAT,
     SET_OPEN,
     SET_HOME,
-    HOME
+    HOME,
+    BAN,
+    UNBAN
 
 }

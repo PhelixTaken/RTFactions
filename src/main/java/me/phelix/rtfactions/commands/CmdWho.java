@@ -58,7 +58,7 @@ public final class CmdWho extends SubCommand {
         final Set<String> names = new HashSet<>();
         faction.getPlayers().forEach(fPlayer -> {
             final OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(fPlayer.getUUID());
-            names.add(offlinePlayer.getName());
+            names.add(offlinePlayer.getName() + fPlayer.getPrefixCharacters());
         });
         final List<String> msges = new ArrayList<>();
         final List<String> allies = new ArrayList<>();
