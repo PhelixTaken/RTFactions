@@ -41,6 +41,17 @@ public final class CmdJoin extends SubCommand {
             }
 
             final Faction faction = factionHandler.getByName(args[0]);
+
+            if(faction == null) {
+                sendMessage(Message.commandInfoFactionNotExist, args[0]);
+                return;
+            }
+
+            if(faction.isBanned(fme)) {
+                sendMessage(Message.commandInfoPlayerBannedFaction, args[0]);
+                return;
+            }
+
             if(faction.getInvitations().contains(fme)) {
                 join(fme, faction);
                 return;

@@ -34,6 +34,8 @@ public final class Message {
 
     public static String commandInfoFactionNotExist = "&6%s &7does not exists!";
     public static String commandInfoPlayerNotExist = "&6%s &7does not exist!";
+    public static String commandInfoPlayerBanned = "&6%s &7is banned from the faction!";
+    public static String commandInfoPlayerBannedFaction = "&7You are banned from &6%s&7!";
 
     public static String commandHelp = "&6f %s &8> &7";
 
