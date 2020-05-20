@@ -36,6 +36,12 @@ public final class FLocation {
         worldUUID = location.getWorld().getUID().toString();
     }
 
+    public FLocation(String id, int x, int z) {
+        this.x = x;
+        this.z = z;
+        worldUUID = id;
+    }
+
     public FLocation(Chunk chunk) {
         x = chunk.getX();
         z = chunk.getZ();
@@ -60,6 +66,10 @@ public final class FLocation {
 
     public String getWorldName() {
         return Bukkit.getWorld(worldUUID).getName();
+    }
+
+    public FLocation getRelative(int dx, int dz) {
+        return new FLocation(worldUUID, x + dx, z + dz);
     }
 
     public boolean equals(Object o) {

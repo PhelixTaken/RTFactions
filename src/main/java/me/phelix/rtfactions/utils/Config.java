@@ -35,6 +35,14 @@ public final class Config {
     public static String factionCoLeaderPrefix = "**";
     public static String factionLeaderPrefix = "***";
 
+    public static int mapRow = 8;
+    public static int mapWidth = 26;
+    public static String mapPlayer = "&8+";
+    public static String mapAllyColor = "&d";
+    public static String mapWildernessColor = "&8";
+    public static String mapSelfColor = "&a/";
+    public static char[] mapCharacters =  { '#', '%', '$', '&', '!', '^', '*' };
+
     public final void save(Persist persist, File file){
         persist.save(false, instance, file);
     }
