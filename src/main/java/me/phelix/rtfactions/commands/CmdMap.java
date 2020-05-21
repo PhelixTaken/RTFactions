@@ -40,7 +40,7 @@ public final class CmdMap extends SubCommand {
         sendMap(fme.getFaction());
     }
 
-    private void sendMap(Faction faction1) {
+    public void sendMap(Faction faction1) {
         final int mapRowsToUse = Config.mapRow;
         final int mapWidthToUse = Config.mapWidth;
 

@@ -27,8 +27,10 @@ import org.bukkit.command.CommandSender;
 
 public final class CmdClaimAt extends SubCommand {
 
-    public CmdClaimAt(){
+    private final CmdMap map;
+    public CmdClaimAt(CmdMap map){
         super(new String[]{"claimat"}, new String[]{"<x> <z>"}, "", Permission.CLAIMING, true);
+        this.map = map;
     }
 
     @Override
@@ -44,6 +46,7 @@ public final class CmdClaimAt extends SubCommand {
                 if(args[2].equals("false")) {
                     if(faction.equals(fme.getFaction())) {
                         chunkHandler.unclaimChunk(fLocation);
+                        map.sendMap(fme.getFaction());
                     } else {
                         sendMessage(Message.commandUnclaimEnemy, faction.getName());
                     }
@@ -64,6 +67,7 @@ public final class CmdClaimAt extends SubCommand {
                 }
             } else {
                 chunkHandler.claimChunk(fLocation, myFaction);
+                map.sendMap(fme.getFaction());
             }
         }
     }
