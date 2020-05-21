@@ -94,7 +94,10 @@ public final class CmdMap extends SubCommand {
                                 .setClickAsExecuteCmd("/f claimat " + x + " " + z)
                                 .save();
                     } else if (fme.hasFaction() && faction.equals(faction1)) {
-                        message.append(ChatColor.translateAlternateColorCodes('&', Config.mapSelfColor)).setHoverAsTooltip(String.join("\n" ,getLore(faction))).save();
+                        message.append(ChatColor.translateAlternateColorCodes('&', Config.mapSelfColor))
+                                .setHoverAsTooltip(String.join("\n" ,getLore(faction)))
+                                .setClickAsExecuteCmd("/f claimat " + x + " " + z + " false")
+                                .save();
                     } else {
                         message.append(mapInfo.getColor().toString() + mapInfo.getSymbol()).setHoverAsTooltip(String.join("\n" ,getLore(faction))).save();
                     }

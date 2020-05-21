@@ -19,6 +19,7 @@ package me.phelix.rtfactions.commands;
 
 import me.phelix.rtfactions.FLocation;
 import me.phelix.rtfactions.Faction;
+import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
@@ -32,13 +33,31 @@ public final class CmdClaimAt extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args){
-        if(args.length == 2) {
+        if(args.length > 1) {
+
             final int x = Integer.parseInt(args[0]);
             final int z = Integer.parseInt(args[1]);
             final FLocation fLocation = new FLocation(fme.getPlayer().getLocation().getWorld().getUID().toString(), x, z);
             final Faction faction = chunkHandler.getFactionFromChunk(fLocation);
+
+            if(args.length == 3) {
+                if(args[2].equals("false")) {
+                    if(faction.equals(fme.getFaction())) {
+                        chunkHandler.unclaimChunk(fLocation);
+                    } else {
+                        sendMessage(Message.commandUnclaimEnemy, faction.getName());
+                    }
+                }
+                return;
+            }
+
+            if(myFaction.getPowerLeft() - Config.factionClaimPower < 0) {
+                sendMessage(Message.commandClaimNotEnoughPower);
+                return;
+            }
+
             if(!faction.getName().equals("Wilderness")) {
-                if(faction.equals(myFaction)) {
+                if(faction.equals(fme.getFaction())) {
                     sendMessage(Message.commandClaimSelf);
                 } else {
                     sendMessage(Message.commandClaimEnemy, faction.getName());
