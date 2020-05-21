@@ -21,14 +21,13 @@ import me.phelix.rtfactions.FLocation;
 import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.JsonMessage;
+import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public final class CmdMap extends SubCommand {
 
@@ -38,10 +37,10 @@ public final class CmdMap extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        sendMap();
+        sendMap(fme.getFaction());
     }
 
-    private void sendMap() {
+    private void sendMap(Faction faction1) {
         final int mapRowsToUse = Config.mapRow;
         final int mapWidthToUse = Config.mapWidth;
 
@@ -71,7 +70,7 @@ public final class CmdMap extends SubCommand {
                 final Faction faction = chunkHandler.getFactionFromChunk(fLocation1);
 
                 if (!infoMap.containsKey(faction)) {
-                    if (!faction.getName().equals("Wilderness") && faction.isAlly(myFaction)) {
+                    if (!faction.getName().equals("Wilderness") && faction.isAlly(faction1)) {
                         infoMap.put(faction, new MapInfo(faction, '@'));
                     } else {
                         infoMap.put(faction, new MapInfo(faction, Config.mapCharacters[nextChar]));
@@ -86,11 +85,11 @@ public final class CmdMap extends SubCommand {
                 if (x == fLocation.getX() && z == fLocation.getZ()) {
                     message.append(ChatColor.translateAlternateColorCodes('&', Config.mapPlayer)).save();
                 } else {
-                    if (!faction.getName().equals("Wilderness") && faction.isAlly(myFaction)) {
+                    if (!faction.getName().equals("Wilderness") && faction.isAlly(faction1)) {
                         message.append(ChatColor.LIGHT_PURPLE + "@").save();
                     } else if (faction.getName().equals("Wilderness")) {
                         message.append(ChatColor.translateAlternateColorCodes('&', Config.mapWildernessColor + "-")).save();
-                    } else if (fme.hasFaction() && faction.equals(myFaction)) {
+                    } else if (fme.hasFaction() && faction.equals(faction1)) {
                         message.append(ChatColor.translateAlternateColorCodes('&', Config.mapSelfColor)).save();
                     } else {
                         message.append(mapInfo.getColor().toString() + mapInfo.getSymbol()).save();
@@ -101,6 +100,27 @@ public final class CmdMap extends SubCommand {
             }
             message.send(fme.getPlayer());
         }
+
+
+        infoMap.forEach((faction, mapInfo) -> System.out.println(faction.getName()));
+
+        final Set<String> factionMap = new HashSet<>();
+
+        infoMap.forEach((faction, mapInfo) -> {
+
+            if(faction.getName().equals("Wilderness")) return;
+            if(mapInfo.getFaction().equals(faction1)) return;
+
+            if(faction.isAlly(faction1)) {
+                factionMap.add(ChatColor.translateAlternateColorCodes('&', Config.mapAllyColor + mapInfo.getSymbol() + " " + mapInfo.getFaction().getName()) );
+                return;
+            }
+
+            factionMap.add(mapInfo.getColor().toString() + mapInfo.getSymbol() + " " + mapInfo.getFaction().getName());
+
+        });
+
+        fme.sendMessage(color(factionMap.toString().replace("[", "").replace("]", "")));
 
     }
 
