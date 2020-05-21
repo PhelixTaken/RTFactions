@@ -87,13 +87,13 @@ public final class CmdMap extends SubCommand {
                     message.append(ChatColor.translateAlternateColorCodes('&', Config.mapPlayer)).save();
                 } else {
                     if (!faction.getName().equals("Wilderness") && faction.isAlly(faction1)) {
-                        message.append(ChatColor.LIGHT_PURPLE + "@").save();
+                        message.append(ChatColor.LIGHT_PURPLE + "@").setHoverAsTooltip(String.join("\n" ,getLore(faction))).save();
                     } else if (faction.getName().equals("Wilderness")) {
                         message.append(ChatColor.translateAlternateColorCodes('&', Config.mapWildernessColor + "-")).save();
                     } else if (fme.hasFaction() && faction.equals(faction1)) {
-                        message.append(ChatColor.translateAlternateColorCodes('&', Config.mapSelfColor)).save();
+                        message.append(ChatColor.translateAlternateColorCodes('&', Config.mapSelfColor)).setHoverAsTooltip(String.join("\n" ,getLore(faction))).save();
                     } else {
-                        message.append(mapInfo.getColor().toString() + mapInfo.getSymbol()).save();
+                        message.append(mapInfo.getColor().toString() + mapInfo.getSymbol()).setHoverAsTooltip(String.join("\n" ,getLore(faction))).save();
                     }
 
                 }
@@ -102,7 +102,7 @@ public final class CmdMap extends SubCommand {
             message.send(fme.getPlayer());
         }
 
-        
+
         final Set<String> factionMap = new HashSet<>();
 
         infoMap.forEach((faction, mapInfo) -> {
@@ -123,6 +123,17 @@ public final class CmdMap extends SubCommand {
 
     }
 
+    private List<String> getLore(Faction faction) {
+        final List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Tag » " + ChatColor.GOLD + faction.getName());
+        lore.add(ChatColor.GRAY + "Leader » " + ChatColor.GOLD + faction.getLeader().getName());
+        lore.add(ChatColor.GRAY + "Claims » " + ChatColor.GOLD + faction.getClaims().size() + ChatColor.GRAY + "/" + ChatColor.GOLD + faction.getTotalPower() / Config.factionClaimPower);
+        lore.add(ChatColor.GRAY + "Power » " + ChatColor.GOLD + faction.getPowerLeft() + ChatColor.GRAY + "/" + ChatColor.GOLD + faction.getTotalPower());
+        return lore;
+    }
+
+
+
 }
 
 final class MapInfo {
@@ -135,7 +146,7 @@ final class MapInfo {
         this.faction = faction;
         this.symbol = symbol;
         color = ChatColor.getByChar(Integer.toHexString(new Random().nextInt(16)));
-        while (color == ChatColor.GREEN || color == ChatColor.DARK_GRAY) {
+        while (color == ChatColor.GREEN || color == ChatColor.DARK_GRAY || color == ChatColor.BLACK) {
             color = ChatColor.getByChar(Integer.toHexString(new Random().nextInt(16)));
         }
     }
