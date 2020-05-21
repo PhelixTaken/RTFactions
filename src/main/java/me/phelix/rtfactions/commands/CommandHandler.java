@@ -60,6 +60,7 @@ public final class CommandHandler implements CommandExecutor {
         commands.add(new CmdKick());
         commands.add(new CmdBan());
         commands.add(new CmdMap());
+        commands.add(new CmdClaimAt());
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
