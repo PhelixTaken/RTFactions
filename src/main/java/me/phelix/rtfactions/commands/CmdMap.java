@@ -102,9 +102,7 @@ public final class CmdMap extends SubCommand {
             message.send(fme.getPlayer());
         }
 
-
-        infoMap.forEach((faction, mapInfo) -> System.out.println(faction.getName()));
-
+        
         final Set<String> factionMap = new HashSet<>();
 
         infoMap.forEach((faction, mapInfo) -> {
