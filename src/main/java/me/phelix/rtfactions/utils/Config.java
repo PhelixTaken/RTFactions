@@ -35,8 +35,8 @@ public final class Config {
     public static String factionCoLeaderPrefix = "**";
     public static String factionLeaderPrefix = "***";
 
-    public static int mapRow = 8;
-    public static int mapWidth = 26;
+    public static int mapRow = 6;
+    public static int mapWidth = 25;
     public static String mapPlayer = "&8+";
     public static String mapAllyColor = "&d";
     public static String mapWildernessColor = "&8";

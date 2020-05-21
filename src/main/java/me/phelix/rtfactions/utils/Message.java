@@ -29,6 +29,8 @@ public final class Message {
 
     public static String prefix ="&7[&6!&7]";
 
+    public static String commandMapPrefix = "&m&l&8=======================< &r&6Map &r&m&l&8>=======================";
+
     public static String commandFactionNeeded = "&7You must be in a faction to do that!";
     public static String commandPermissionNeeded = "&7Your faction does not allow you to do this, it requires the action &6%s&7!";
 

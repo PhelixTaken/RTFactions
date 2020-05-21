@@ -60,6 +60,7 @@ public final class CmdMap extends SubCommand {
 
         final Map<Faction, MapInfo> infoMap = new HashMap<>();
         int nextChar = 0;
+        fme.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Message.commandMapPrefix));
 
         for (int x = xStart; x <= xEnd; x++) {
             final JsonMessage message = new JsonMessage();
