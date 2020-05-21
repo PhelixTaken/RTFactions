@@ -140,8 +140,10 @@ public final class CmdMap extends SubCommand {
             lore.add(ChatColor.GRAY + "Leader » " + ChatColor.GOLD + faction.getLeader().getName());
             lore.add(ChatColor.GRAY + "Claims » " + ChatColor.GOLD + faction.getClaims().size() + ChatColor.GRAY + "/" + ChatColor.GOLD + faction.getTotalPower() / Config.factionClaimPower);
             lore.add(ChatColor.GRAY + "Power » " + ChatColor.GOLD + faction.getPowerLeft() + ChatColor.GRAY + "/" + ChatColor.GOLD + faction.getTotalPower());
-            lore.add("");
-            lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.ITALIC + "(( Click to unclaim ))");
+            if (faction.equals(fme.getFaction())) {
+                lore.add("");
+                lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.ITALIC + "(( Click to unclaim ))");
+            }
         }
         return lore;
     }
