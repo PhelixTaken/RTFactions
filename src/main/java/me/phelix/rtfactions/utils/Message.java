@@ -99,7 +99,7 @@ public final class Message {
 
     public static String commandDeleteWarpSuccess = "&7Deleted the warp &6%s&7!";
 
-    public static String commandDisbandWarning = "&7Click here to disband your faction. &o&6(( This cannot be undone! ))";
+    public static String commandDisbandWarning = "&7Click here to disband your faction. &6&o(( This cannot be undone! ))";
     public static String commandDisbandBroadcast = "&7The faction is disbanded by &6%s&7!";
     public static String commandDisbandSuccess = "&7You have disbanded the faction &6%s&7!";
 
