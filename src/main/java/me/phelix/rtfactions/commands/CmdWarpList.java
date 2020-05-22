@@ -49,6 +49,7 @@ public final class CmdWarpList extends SubCommand {
                 i++;
                 if(i == myFaction.getWarps().size())
                     comma = "";
+                if(warp.getName().equalsIgnoreCase("home")) continue;
                 if(warp.hasPassword() && fme.getRole() == Role.LEADER) {
                     message.append(ChatColor.translateAlternateColorCodes('&',"&7" + warp.getName() + comma)).setHoverAsTooltip(warp.getPassword()).save();
                 } else {

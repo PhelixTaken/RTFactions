@@ -34,6 +34,12 @@ public final class CmdSetWarp extends SubCommand {
         if (args.length > 0 && args.length < 3) {
 
             final String name = args[0];
+
+            if(name.equalsIgnoreCase("home")) {
+                sendMessage(Message.commandSetWarpHome);
+                return;
+            }
+
             String password = null;
             if (args.length == 2)
                 password = args[1];

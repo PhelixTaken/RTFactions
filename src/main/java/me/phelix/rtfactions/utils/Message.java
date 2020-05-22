@@ -79,6 +79,7 @@ public final class Message {
     public static String commandSetWarpTerritory = "&7You can't create a warp in &6enemy territory&7!";
     public static String commandSetWarpWithPassword = "&7Created the warp &6%s &7with password as &6%s";
     public static String commandSetWarpWithoutPassword = "&7Created the warp &6%s";
+    public static String commandSetWarpHome = "&7You can't name the warp &6home&7!";
 
     public static String commandWarpNotExist = "&7The warp &6%s &7does not exist!";
     public static String commandWarpRequiresPassword = "&7The warp &6%s &7requires a password!";
