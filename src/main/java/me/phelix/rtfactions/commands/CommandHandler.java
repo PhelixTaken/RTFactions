@@ -64,6 +64,7 @@ public final class CommandHandler implements CommandExecutor {
         commands.add(new CmdClaimAt(map));
         commands.add(new CmdEnemy());
         commands.add(new CmdRemoveEnemy());
+        commands.add(new CmdWarpList());
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

@@ -40,7 +40,7 @@ public final class Config {
     public static String mapPlayer = "&8+";
     public static String mapAllyColor = "&d";
     public static String mapWildernessColor = "&8";
-    public static String mapSelfColor = "&a/";
+    public static String mapSelfPrefix = "&a/";
     public static char[] mapCharacters =  { '#', '%', '$', '&', '!', '^', '*' };
 
     public final void save(Persist persist, File file){

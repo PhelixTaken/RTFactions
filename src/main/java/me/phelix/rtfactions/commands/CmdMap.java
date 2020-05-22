@@ -53,8 +53,10 @@ public final class CmdMap extends SubCommand {
                 fLocation.getX() + mapRowsToUse,
                 fLocation.getZ() - mapWidthToUse);
 
+        // This can be done with Math.min but for now I won't use it
         final int xStart = start.getX() > end.getX() ? end.getX() : start.getX();
         final int zStart = start.getZ() > end.getZ() ? end.getZ() : start.getZ();
+        // This can be done with Math.max but for now I won't use it
         final int xEnd = start.getX() < end.getX() ? end.getX() : start.getX();
         final int zEnd = start.getZ() < end.getZ() ? end.getZ() : start.getZ();
 
@@ -96,7 +98,7 @@ public final class CmdMap extends SubCommand {
                                 .setClickAsExecuteCmd("/f claimat " + x + " " + z)
                                 .save();
                     } else if (fme.hasFaction() && faction.equals(faction1)) {
-                        message.append(ChatColor.translateAlternateColorCodes('&', Config.mapSelfColor))
+                        message.append(ChatColor.translateAlternateColorCodes('&', Config.mapSelfPrefix))
                                 .setHoverAsTooltip(String.join("\n" ,getLore(faction)))
                                 .setClickAsExecuteCmd("/f claimat " + x + " " + z + " false")
                                 .save();

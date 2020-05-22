@@ -17,6 +17,7 @@
 
 package me.phelix.rtfactions.utils.permission;
 
+import me.phelix.rtfactions.Faction;
 import me.phelix.rtfactions.utils.Role;
 
 import java.util.Collection;
@@ -43,6 +44,10 @@ public final class FactionPermission {
 
     public boolean hasPermission(Role role, Permission permission) {
         return permissionMap.get(role).contains(permission);
+    }
+
+    public boolean containsPermission(Permission permission) {
+        return permissionMap.values().stream().anyMatch(map -> map.contains(permission));
     }
 
     public void setDefaultPermissions() {
@@ -78,6 +83,7 @@ public final class FactionPermission {
                 case UNCLAIMING:
                 case WARP:
                 case HOME:
+                case WARP_LIST:
                     permissionMap.get(member).add(permission);
                     permissionMap.get(moderator).add(permission);
                     permissionMap.get(coleader).add(permission);

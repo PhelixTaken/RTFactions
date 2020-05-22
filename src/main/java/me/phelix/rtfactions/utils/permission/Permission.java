@@ -45,6 +45,7 @@ public enum Permission {
     BAN,
     UNBAN,
     ENEMY,
-    REMOVE_ENEMY
+    REMOVE_ENEMY,
+    WARP_LIST,
 
 }
