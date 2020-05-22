@@ -25,8 +25,6 @@ import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.handlers.PlayerHandler;
 import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
-import me.phelix.rtfactions.utils.Role;
-import me.phelix.rtfactions.utils.permission.Permission;
 import net.milkbowl.vault.economy.Economy;
 import net.prosavage.baseplugin.serializer.Persist;
 import org.bukkit.Bukkit;
@@ -144,12 +142,6 @@ public final class RTFactions extends JavaPlugin implements Listener {
         factionHandler.getFactionMap().putAll(factionMap);
 
         for (final Faction faction : factionHandler.getFactionMap().values()) {
-
-            for(final Permission permission : Permission.values()) {
-                if(!faction.getPermissions().containsPermission(permission))
-                    faction.getPermissions().addPermission(Role.LEADER, permission);
-            }
-
             for (final FPlayer fPlayer : faction.getPlayers()) {
                 fPlayer.setFaction(faction);
                 getPlayerHandler().getPlayerMap().put(fPlayer.getUUID(), fPlayer);

@@ -20,10 +20,15 @@ package me.phelix.rtfactions.commands;
 import me.phelix.rtfactions.utils.JsonMessage;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.Role;
+import me.phelix.rtfactions.utils.Warp;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.Permission;
+import net.milkbowl.vault.chat.Chat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public final class CmdWarpList extends SubCommand {
 
@@ -35,14 +40,21 @@ public final class CmdWarpList extends SubCommand {
     public void execute(CommandSender sender, String[] args){
         if(args.length == 0) {
             final JsonMessage message = new JsonMessage();
-            message.append(ChatColor.translateAlternateColorCodes('&', Message.prefix + " &7")).save();
-            myFaction.getWarps().forEach((name, warp) -> {
+            message.append(ChatColor.translateAlternateColorCodes('&', Message.prefix + " ")).save();
+
+            String comma = ", ";
+            int i = 0;
+
+            for(final Warp warp : myFaction.getWarps().values()) {
+                i++;
+                if(i == myFaction.getWarps().size())
+                    comma = "";
                 if(warp.hasPassword() && fme.getRole() == Role.LEADER) {
-                    message.append(name).setHoverAsTooltip(warp.getPassword()).save();
+                    message.append(ChatColor.translateAlternateColorCodes('&',"&7" + warp.getName() + comma)).setHoverAsTooltip(warp.getPassword()).save();
                 } else {
-                    message.append(name).save();
+                    message.append(ChatColor.translateAlternateColorCodes('&',"&7" + warp.getName() + comma)).save();
                 }
-            });
+            }
 
             message.send(fme.getPlayer());
         } else {

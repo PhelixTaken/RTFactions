@@ -47,7 +47,12 @@ public final class FactionPermission {
     }
 
     public boolean containsPermission(Permission permission) {
-        return permissionMap.values().stream().anyMatch(map -> map.contains(permission));
+        for (final Collection<Permission> map : permissionMap.values()) {
+            if (map.contains(permission)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setDefaultPermissions() {
