@@ -43,6 +43,8 @@ public enum Permission {
     SET_HOME,
     HOME,
     BAN,
-    UNBAN
+    UNBAN,
+    ENEMY,
+    REMOVE_ENEMY
 
 }

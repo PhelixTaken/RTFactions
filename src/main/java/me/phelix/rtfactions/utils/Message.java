@@ -140,6 +140,10 @@ public final class Message {
     public static String commandBanHigherRole = "&7You can't ban someone that has the same or higher role than you!";
     public static String commandBanBroadcast = "&6%s &7has been ban from the faction by &6%s&7!";
 
+    public static String commandEnemyAlly = "&7You can't enemy an ally of your faction!";
+    public static String commandEnemyAlready = "&7Your faction is already an enemy with &6%s&7!";
+    public static String commandEnemyBroadcast = "&7Your faction is now an enemy with &6%s&7!";
+
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");
         add("&7Tag \u00BB &6{faction_name}");

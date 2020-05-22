@@ -40,6 +40,7 @@ public final class Faction {
     private final String name;
     private final Set<FPlayer> players = new HashSet<>();
     private final Set<String> allyNames = new HashSet<>();
+    private final Set<String> enemyNames = new HashSet<>();
     private transient Set<FLocation> claimedChunks = new HashSet<>();
     private transient Set<FPlayer> invitations = new HashSet<>();
     private final transient Set<Faction> allyRequests = new HashSet<>();
@@ -286,4 +287,29 @@ public final class Faction {
         return bans.contains(fPlayer.getId());
     }
 
+    @NotNull
+    public Set<String> getEnemyNames(){
+        return enemyNames;
+    }
+
+    @NotNull
+    public Set<Faction> getEnemies(FactionHandler factionHandler) {
+        final Set<Faction> factions = new HashSet<>();
+        for(final String string : enemyNames) {
+            factions.add(factionHandler.getByName(string));
+        }
+        return factions;
+    }
+
+    public void addEnemy(Faction faction) {
+        enemyNames.add(faction.getName());
+    }
+
+    public void removeEnemy(Faction faction) {
+        enemyNames.remove(faction.getName());
+    }
+
+    public boolean isEnemy(Faction faction){
+        return enemyNames.contains(faction.getName());
+    }
 }

@@ -101,6 +101,8 @@ public final class FactionPermission {
                 case SET_HOME:
                 case BAN:
                 case UNBAN:
+                case ENEMY:
+                case REMOVE_ENEMY:
                     permissionMap.get(coleader).add(permission);
                     permissionMap.get(leader).add(permission);
                     break;

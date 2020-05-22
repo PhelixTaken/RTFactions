@@ -77,6 +77,8 @@ public final class CmdMap extends SubCommand {
                         infoMap.put(faction, new MapInfo(faction, Config.mapCharacters[nextChar]));
                     }
                 }
+
+                
                 nextChar++;
                 if (nextChar >= Config.mapCharacters.length)
                     nextChar = 0;

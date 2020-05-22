@@ -2,7 +2,7 @@ main: me.phelix.rtfactions.RTFactions
 version: 0.0.1A
 author: Phelix
 name: RTFactions
-softdepend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI, Vault]
 commands:
   f:
     aliases: [faction, factions]

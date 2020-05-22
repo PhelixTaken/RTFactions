@@ -62,6 +62,7 @@ public final class CommandHandler implements CommandExecutor {
         final CmdMap map = new CmdMap();
         commands.add(map);
         commands.add(new CmdClaimAt(map));
+        commands.add(new CmdEnemy());
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

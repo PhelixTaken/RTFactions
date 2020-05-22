@@ -25,12 +25,14 @@ import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.handlers.PlayerHandler;
 import me.phelix.rtfactions.utils.Config;
 import me.phelix.rtfactions.utils.Message;
+import net.milkbowl.vault.economy.Economy;
 import net.prosavage.baseplugin.serializer.Persist;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -44,8 +46,14 @@ public final class RTFactions extends JavaPlugin implements Listener {
     private ChunkHandler chunkHandler;
     private final Message message = new Message();
     private final Config config = new Config();
+    private Economy economy;
 
     public void onEnable() {
+        if (!setupEconomy()) {
+            getLogger().severe("Couldn't find Vault, disabling the plugin!");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
         getCommand("f").setExecutor(new CommandHandler(this));
 
         getConfig().options().copyDefaults(true);
@@ -54,6 +62,7 @@ public final class RTFactions extends JavaPlugin implements Listener {
         registerEvents();
 
         load();
+
     }
 
     public void onDisable() {
@@ -61,7 +70,24 @@ public final class RTFactions extends JavaPlugin implements Listener {
         save();
     }
 
-    private void registerEvents(){
+    private boolean setupEconomy() {
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null)
+            return false;
+
+        final RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+
+        if (rsp == null)
+            return false;
+
+        economy = rsp.getProvider();
+        return true;
+    }
+
+    public Economy getEconomy() {
+        return economy;
+    }
+
+    private void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinEvent(this), this);
         Bukkit.getPluginManager().registerEvents(this, this);
     }
