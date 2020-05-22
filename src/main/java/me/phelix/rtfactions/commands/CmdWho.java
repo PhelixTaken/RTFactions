@@ -81,7 +81,6 @@ public final class CmdWho extends SubCommand {
                     .replace("{faction_allies}", allies.toString().replace("[", "").replace("]", ""))
                     .replace("{faction_enemies}", enemies.toString().replace("[", "").replace("]", ""))
                     .replace("{faction_description}", faction.getDescription());
-            ;
 
             msges.add(str);
         }
