@@ -156,6 +156,7 @@ public final class Message {
         add("&7Claims \u00BB &6{faction_claims}&7/&6{faction_totalclaims}");
         add("&7Power \u00BB &6{faction_powerleft}&7/&6{faction_totalpower}");
         add("&7Allies \u00BB &6{faction_allies}");
+        add("&7Enemies \u00BB &6{faction_enemies}");
         add("&8&l&m===========================================");
     }};
 

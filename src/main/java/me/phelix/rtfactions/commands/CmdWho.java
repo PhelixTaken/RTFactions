@@ -62,10 +62,11 @@ public final class CmdWho extends SubCommand {
         });
         final List<String> msges = new ArrayList<>();
         final List<String> allies = new ArrayList<>();
+        final List<String> enemies = new ArrayList<>();
 
-        for(final Faction ally : faction.getAllies(factionHandler)){
-            allies.add(ally.getName());
-        }
+        faction.getAllies(factionHandler).forEach(ally -> allies.add(ally.getName()));
+        faction.getEnemies(factionHandler).forEach(enemy -> enemies.add(enemy.getName()));
+
 
         for(final String string : Message.show){
             final String str = string.replace("{faction_name}", faction.getName())
@@ -78,6 +79,7 @@ public final class CmdWho extends SubCommand {
                     .replace("{faction_powerleft}", faction.getPowerLeft() + "")
                     .replace("{faction_totalpower}", faction.getTotalPower() + "")
                     .replace("{faction_allies}", allies.toString().replace("[", "").replace("]", ""))
+                    .replace("{faction_enemies}", enemies.toString().replace("[", "").replace("]", ""))
                     .replace("{faction_description}", faction.getDescription());
             ;
 
