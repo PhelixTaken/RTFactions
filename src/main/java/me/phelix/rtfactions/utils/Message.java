@@ -144,6 +144,9 @@ public final class Message {
     public static String commandEnemyAlready = "&7Your faction is already an enemy with &6%s&7!";
     public static String commandEnemyBroadcast = "&7Your faction is now an enemy with &6%s&7!";
 
+    public static String commandEnemyRemoveNot = "&7Your faction is not an enemy with &6%s&7!";
+    public static String commandEnemyRemoveBroadcast = "&7Your faction is not an enemy anymore with &6%s&7!";
+
     public static List<String> show = new ArrayList<String>() {{
         add("&8&l&m===========================================");
         add("&7Tag \u00BB &6{faction_name}");
