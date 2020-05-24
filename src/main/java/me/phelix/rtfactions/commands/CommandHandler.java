@@ -83,7 +83,7 @@ public final class CommandHandler implements CommandExecutor {
 
                         if (subCommand.getAliases()[i].equalsIgnoreCase(args[0])) {
 
-                            if (subCommand.setCommandSender(sender, plugin, plugin.getPlayerHandler(), plugin.getFactionHandler(), plugin.getChunkHandler())) {
+                            if (subCommand.setCommandSender(sender, plugin, plugin.getPlayerHandler(), plugin.getFactionHandler(), plugin.getChunkHandler(), plugin.getEconomy())) {
 
                                 if (subCommand.hasPermission()) {
                                     subCommand.execute(sender, Arrays.copyOfRange(args, 1, args.length));

@@ -82,7 +82,7 @@
         <dependency>
             <groupId>net.prosavage</groupId>
             <artifactId>BasePlugin</artifactId>
-            <version>1.7.2</version>
+            <version>1.7.4</version>
         </dependency>
 
         <dependency>

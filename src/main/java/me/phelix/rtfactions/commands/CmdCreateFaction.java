@@ -24,6 +24,7 @@ import me.phelix.rtfactions.utils.Role;
 import me.phelix.rtfactions.utils.commands.SubCommand;
 import me.phelix.rtfactions.utils.permission.FactionPermission;
 import me.phelix.rtfactions.utils.permission.Permission;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.command.CommandSender;
 
 public final class CmdCreateFaction extends SubCommand {
@@ -67,6 +68,8 @@ public final class CmdCreateFaction extends SubCommand {
         final FactionPermission factionPermission = new FactionPermission();
         factionPermission.setDefaultPermissions();
         faction.setPermission(factionPermission);
+        economy.createBank(faction.getName(), fme.getPlayer());
+        economy.bankDeposit(faction.getName(), 0);
         sendMessage(Message.commandCreateFaction, faction.getName());
     }
 }

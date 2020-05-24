@@ -25,6 +25,7 @@ import me.phelix.rtfactions.handlers.FactionHandler;
 import me.phelix.rtfactions.handlers.PlayerHandler;
 import me.phelix.rtfactions.utils.Message;
 import me.phelix.rtfactions.utils.permission.Permission;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -43,6 +44,7 @@ public abstract class SubCommand {
     public PlayerHandler playerHandler;
     public FactionHandler factionHandler;
     public ChunkHandler chunkHandler;
+    public Economy economy;
 
     protected SubCommand(String[] aliases, String[] args, String description, Permission permission, boolean factionNeeded) {
         this.aliases = aliases;
@@ -54,11 +56,12 @@ public abstract class SubCommand {
 
     public abstract void execute(CommandSender sender, String[] args);
 
-    public final boolean setCommandSender(CommandSender sender, RTFactions plugin, PlayerHandler playerHandler, FactionHandler factionHandler, ChunkHandler chunkHandler) {
+    public final boolean setCommandSender(CommandSender sender, RTFactions plugin, PlayerHandler playerHandler, FactionHandler factionHandler, ChunkHandler chunkHandler, Economy economy) {
         this.plugin = plugin;
         this.playerHandler = playerHandler;
         this.factionHandler = factionHandler;
         this.chunkHandler = chunkHandler;
+        this.economy = economy;
         if (sender instanceof Player) {
             this.fme = playerHandler.getByPlayer((Player) sender);
             if (fme.hasFaction())

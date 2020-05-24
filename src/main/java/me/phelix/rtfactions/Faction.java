@@ -68,13 +68,13 @@ public final class Faction {
     }
 
     @NotNull
-    public Set<String> getAllyNames(){
+    public Set<String> getAllyNames() {
         return allyNames;
     }
 
-    public Set<Faction> getAllies(FactionHandler factionHandler){
+    public Set<Faction> getAllies(FactionHandler factionHandler) {
         final Set<Faction> factions = new HashSet<>();
-        for(final String string : getAllyNames()) {
+        for (final String string : getAllyNames()) {
             factions.add(factionHandler.getByName(string));
         }
         return factions;
@@ -106,20 +106,20 @@ public final class Faction {
     }
 
     public void addClaim(FLocation fLocation) {
-        if(claimedChunks == null)
+        if (claimedChunks == null)
             claimedChunks = new HashSet<>();
         claimedChunks.add(fLocation);
     }
 
     public void removeClaim(FLocation fLocation) {
-        if(claimedChunks == null)
+        if (claimedChunks == null)
             claimedChunks = new HashSet<>();
         claimedChunks.remove(fLocation);
     }
 
     @NotNull
     public Set<FLocation> getClaims() {
-        if(claimedChunks == null)
+        if (claimedChunks == null)
             claimedChunks = new HashSet<>();
         return claimedChunks;
     }
@@ -145,7 +145,7 @@ public final class Faction {
         power += amount;
     }
 
-    public void removePower(int amount){
+    public void removePower(int amount) {
         power -= amount;
     }
 
@@ -173,17 +173,17 @@ public final class Faction {
     }
 
     @NotNull
-    public Set<FPlayer> getInvitations(){
+    public Set<FPlayer> getInvitations() {
         return invitations;
     }
 
-    public void invite(FPlayer fPlayer){
-        if(invitations == null)
+    public void invite(FPlayer fPlayer) {
+        if (invitations == null)
             invitations = new HashSet<>();
         invitations.add(fPlayer);
     }
 
-    public void deinvite(FPlayer fPlayer){
+    public void deinvite(FPlayer fPlayer) {
         invitations.remove(fPlayer);
     }
 
@@ -202,20 +202,20 @@ public final class Faction {
     }
 
     @NotNull
-    public FPlayer getLeader(){
+    public FPlayer getLeader() {
         return getPlayersByRole(Role.LEADER).stream().findFirst().get();
     }
 
     @NotNull
-    public Set<Faction> getAllyRequests(){
+    public Set<Faction> getAllyRequests() {
         return allyRequests;
     }
 
-    public void addAllyRequest(Faction ally){
+    public void addAllyRequest(Faction ally) {
         allyRequests.add(ally);
     }
 
-    public void removeAllyRequest(Faction ally){
+    public void removeAllyRequest(Faction ally) {
         allyRequests.remove(ally);
     }
 
@@ -244,7 +244,7 @@ public final class Faction {
         return warps.get(name);
     }
 
-    public void addWarp(String name, @Nullable String password, Location location){
+    public void addWarp(String name, @Nullable String password, Location location) {
         warps.put(name, new Warp(name, password, location.getWorld().getUID().toString(), location.getX(), location.getY(), location.getZ()));
     }
 
@@ -279,23 +279,23 @@ public final class Faction {
         bans.add(fPlayer.getId());
     }
 
-    public void unbanPlayer(FPlayer fPlayer){
+    public void unbanPlayer(FPlayer fPlayer) {
         bans.remove(fPlayer.getId());
     }
 
-    public boolean isBanned(FPlayer fPlayer){
+    public boolean isBanned(FPlayer fPlayer) {
         return bans.contains(fPlayer.getId());
     }
 
     @NotNull
-    public Set<String> getEnemyNames(){
+    public Set<String> getEnemyNames() {
         return enemyNames;
     }
 
     @NotNull
     public Set<Faction> getEnemies(FactionHandler factionHandler) {
         final Set<Faction> factions = new HashSet<>();
-        for(final String string : enemyNames) {
+        for (final String string : enemyNames) {
             factions.add(factionHandler.getByName(string));
         }
         return factions;
@@ -309,7 +309,8 @@ public final class Faction {
         enemyNames.remove(faction.getName());
     }
 
-    public boolean isEnemy(Faction faction){
+    public boolean isEnemy(Faction faction) {
         return enemyNames.contains(faction.getName());
     }
+
 }
