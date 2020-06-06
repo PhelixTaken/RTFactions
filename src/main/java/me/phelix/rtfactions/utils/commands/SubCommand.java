@@ -29,6 +29,12 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class SubCommand {
 
@@ -134,6 +140,7 @@ public abstract class SubCommand {
     public final String color(String msg){
         return ChatColor.translateAlternateColorCodes('&', Message.prefix + " " + msg);
     }
+
 
     @Override
     public final String toString() {

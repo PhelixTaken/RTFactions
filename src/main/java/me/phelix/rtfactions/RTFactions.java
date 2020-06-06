@@ -59,6 +59,8 @@ public final class RTFactions extends JavaPlugin implements Listener {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
+        //yolo
+
         registerEvents();
 
         load();

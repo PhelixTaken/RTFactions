@@ -22,5 +22,4 @@ import me.phelix.rtfactions.utils.commands.SubCommand;
 public final class CmdBalance extends SubCommand {
 
 
-
 }
